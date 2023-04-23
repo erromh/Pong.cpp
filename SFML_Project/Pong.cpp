@@ -6,8 +6,6 @@
 using namespace sf;
 using namespace std;
 
-//https://austinmorlan.com/posts/pong_clone/
-
 int main()
 {
 	const int WINDOW_HEIGHT = 600;
