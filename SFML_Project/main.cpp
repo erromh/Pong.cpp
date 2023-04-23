@@ -48,7 +48,6 @@ int main()
 				if (event.key.code == Keyboard::S)
 				{
 					leftpl.moveDown();
-					cout << "Y left = " << leftPosition.y << endl << endl;
 				}
 
 				if (event.key.code == Keyboard::W)
@@ -76,7 +75,7 @@ int main()
 		window.draw(leftpl.getShape());
 		window.draw(rightPlayer.getShape());
 		window.display();
-	
+		
 	}
 	return 0;
 }	
