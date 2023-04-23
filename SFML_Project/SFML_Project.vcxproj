@@ -147,7 +147,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="LeftPlayer.cpp" />
-    <ClCompile Include="Pong.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="RightPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
