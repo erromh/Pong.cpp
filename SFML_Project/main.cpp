@@ -51,19 +51,16 @@ int main()
 				if (event.key.code == Keyboard::W)
 				{
 					leftpl.moveUp();
-					cout << "Y left = " << leftPosition.y << endl << endl;
 				}
 
 				if (event.key.code == Keyboard::Up)
 				{
 					rightPlayer.moveUp();
-					cout << "Y right = " << rightPosition.y << endl << endl;
 				}
 
 				if (event.key.code == Keyboard::Down)
 				{
 					rightPlayer.moveDown();
-					cout << "Y right = " << rightPosition.y << endl << endl;
 				}
 			}
 		}
