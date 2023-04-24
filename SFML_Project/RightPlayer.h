@@ -11,7 +11,7 @@ private:
 	RectangleShape m_Shape;
 	Color m_Color;
 
-	float yVelocity = 30;
+	float yRightVelocity = 30;
 
 public:
 	void moveDown();

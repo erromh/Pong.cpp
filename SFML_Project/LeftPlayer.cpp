@@ -17,16 +17,25 @@ LeftPlayer::LeftPlayer(Vector2f start_pos, Color p_color)
 
 void LeftPlayer::moveDown()
 {
-	m_Leftposition.y += yVelocity;
+	m_Leftposition.y += yLeftVelocity;
+
+	if (m_Leftposition.y == 0)
+	{
+		yLeftVelocity *= 0;
+	}
 	
 	m_Shape.setPosition(m_Leftposition);
+
+	cout << "left y = " << m_Leftposition.y << endl;
 }
 
 void LeftPlayer::moveUp()
 {
-	m_Leftposition.y -= yVelocity;
+	m_Leftposition.y -= yLeftVelocity;
 
 	m_Shape.setPosition(m_Leftposition);
+
+	cout << "left y = " << m_Leftposition.y << endl;
 }
 
 RectangleShape LeftPlayer::getShape()

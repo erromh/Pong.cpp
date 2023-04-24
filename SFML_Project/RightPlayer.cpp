@@ -14,13 +14,13 @@ RightPlayer::RightPlayer(Vector2f start_pos, Color p_color)
 
 void RightPlayer::moveDown()
 {
-	m_rightPosition.y += yVelocity;
+	m_rightPosition.y += yRightVelocity;
 	m_Shape.setPosition(m_rightPosition);
 }
 
 void RightPlayer::moveUp()
 {
-	m_rightPosition.y -= yVelocity;
+	m_rightPosition.y -= yRightVelocity;
 	m_Shape.setPosition(m_rightPosition);
 }
 

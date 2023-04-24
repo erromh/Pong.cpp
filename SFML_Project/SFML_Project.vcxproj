@@ -146,11 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="LeftPlayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RightPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="LeftPlayer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RightPlayer.h" />
