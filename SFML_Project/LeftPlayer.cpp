@@ -18,21 +18,16 @@ LeftPlayer::LeftPlayer(Vector2f start_pos, Color p_color)
 void LeftPlayer::moveDown()
 {
 	m_Leftposition.y += yVelocity;
-	/*
-	cout << "Y left = " << m_Leftposition.y << endl << endl;
-
-	if (m_Leftposition.y == 450);
-	{
-		yVelocity *= 0;
-	}*/
+	
 	m_Shape.setPosition(m_Leftposition);
-
-
 }
 
 void LeftPlayer::moveUp()
 {
 	m_Leftposition.y -= yVelocity;
+
+
+
 	m_Shape.setPosition(m_Leftposition);
 }
 
