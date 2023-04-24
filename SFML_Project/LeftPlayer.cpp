@@ -26,7 +26,7 @@ void LeftPlayer::moveUp()
 {
 	m_Leftposition.y -= yVelocity;
 
-
+	int ff = 90;
 
 	m_Shape.setPosition(m_Leftposition);
 }
