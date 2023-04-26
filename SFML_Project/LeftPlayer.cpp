@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "LeftPlayer.h"
+#define DEBUG
 
 using namespace std;
 
@@ -19,23 +20,55 @@ void LeftPlayer::moveDown()
 {
 	m_Leftposition.y += yLeftVelocity;
 
-	if (m_Leftposition.y == 0)
+	if (m_Leftposition.y >= (450 + yLeftVelocity))
 	{
-		yLeftVelocity *= 0;
+		m_Shape.setPosition(m_Leftposition);
+		moveUp();
 	}
-	
 	m_Shape.setPosition(m_Leftposition);
 
-	cout << "left y = " << m_Leftposition.y << endl;
+#ifdef DEBUG
+	cout << "left Y moveDown() = " << m_Leftposition.y << endl;
+#endif 
+
 }
 
 void LeftPlayer::moveUp()
 {
 	m_Leftposition.y -= yLeftVelocity;
 
+	if (m_Leftposition.y <= -yLeftVelocity)
+	{
+		m_Shape.setPosition(m_Leftposition);
+		moveDown();
+	}
 	m_Shape.setPosition(m_Leftposition);
 
-	cout << "left y = " << m_Leftposition.y << endl;
+#ifdef DEBUG
+	cout << "left Y moveUp() = " << m_Leftposition.y << endl;
+#endif // DEBUG
+
+}
+
+// Разобраться с этой фуекцией
+
+void LeftPlayer::update(Time dt)
+{
+	if (m_moveUp)
+	{
+		m_Leftposition.y -= yLeftVelocity * dt.asSeconds();
+
+		cout << "dt.asSeconds() = " << dt.asSeconds() << endl;
+	}
+
+	if (m_moveDown)
+	{
+		m_Leftposition.y += yLeftVelocity * dt.asSeconds();
+	}
+
+	m_Shape.setPosition(m_Leftposition);
+
+	cout << "Y = " << m_Leftposition.y << endl << endl;
 }
 
 RectangleShape LeftPlayer::getShape()

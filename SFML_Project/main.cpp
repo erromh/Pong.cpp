@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "LeftPlayer.h"
 #include "RightPlayer.h"
+#include "Ball.h"
 
 using namespace sf;
 using namespace std;
@@ -24,11 +25,15 @@ int main()
 
 	Vector2f leftPosition(0, 225);
 	Vector2f rightPosition(950, 225);
+	Vector2f ballPosition(484, 284);
 
 	LeftPlayer leftpl(leftPosition, Color::Red);
-	RightPlayer rightPlayer(rightPosition, Color::Blue);
+	RightPlayer rightPlayer(rightPosition, Color::Blue); 
+	Ball ball1(ballPosition, Color::Yellow);
 
-
+	Clock clock;
+	Time dt = clock.restart();
+	
 	while (window.isOpen())
 	{
 		Event event;
@@ -42,7 +47,6 @@ int main()
 
 			if (event.type == Event::KeyPressed)
 			{
-
 				if (event.key.code == Keyboard::S)
 				{
 					leftpl.moveDown();
@@ -65,10 +69,13 @@ int main()
 			}
 		}
 
+		ball1.ballPosirion();
+
 		window.clear();
 		window.draw(spriteBackgrund);
 		window.draw(leftpl.getShape());
 		window.draw(rightPlayer.getShape());
+		window.draw(ball1.getShape());
 		window.display();
 		
 	}

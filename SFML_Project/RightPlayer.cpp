@@ -1,3 +1,4 @@
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "RightPlayer.h"
 
@@ -15,13 +16,31 @@ RightPlayer::RightPlayer(Vector2f start_pos, Color p_color)
 void RightPlayer::moveDown()
 {
 	m_rightPosition.y += yRightVelocity;
+
+	if (m_rightPosition.y >= (450 + yRightVelocity))
+	{
+		m_Shape.setPosition(m_rightPosition);
+		moveUp();
+	}
 	m_Shape.setPosition(m_rightPosition);
+
+	std::cout << "RIGHT Y moveDown() = " << m_rightPosition.y << std::endl;
+
 }
 
 void RightPlayer::moveUp()
 {
 	m_rightPosition.y -= yRightVelocity;
+
+	if (m_rightPosition.y <= -yRightVelocity)
+	{
+		m_Shape.setPosition(m_rightPosition);
+		moveDown();
+	}
 	m_Shape.setPosition(m_rightPosition);
+
+	std::cout << "RIGHT Y moveUp() = " << m_rightPosition.y << std::endl;
+
 }
 
 RectangleShape RightPlayer::getShape()

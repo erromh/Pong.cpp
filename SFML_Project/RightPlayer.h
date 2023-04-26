@@ -10,14 +10,13 @@ private:
 	Vector2f m_rightPosition;
 	RectangleShape m_Shape;
 	Color m_Color;
-
-	float yRightVelocity = 30;
+	float yRightVelocity = 10;
 
 public:
+
 	void moveDown();
 	void moveUp();
 	RectangleShape getShape();
-
 	RightPlayer(Vector2f start_pos, Color p_color);
 };
 

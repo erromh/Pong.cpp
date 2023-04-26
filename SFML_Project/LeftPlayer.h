@@ -11,12 +11,16 @@ private:
 	RectangleShape m_Shape;
 	Color m_Color;
 
-	float yLeftVelocity = 1;
+	bool m_moveDown = false;
+	bool m_moveUp = false;
+
+	float yLeftVelocity = 10;
 
 public:
 	void moveDown();
 	void moveUp();
 	RectangleShape getShape();
+	void update(Time dt);
 
 	LeftPlayer(Vector2f start_pos, Color p_color);
 };
