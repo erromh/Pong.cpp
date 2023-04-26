@@ -24,6 +24,8 @@ void Ball::ballPosirion()
 		m_xVelocity *= -1;
 	}
 
+	//Fix this peace of shit ff
+
 	if (m_position.y >= 530.0 || m_position.y >= 42 || m_position.y < 0)
 	{
 		m_yVelocity *= -1;
