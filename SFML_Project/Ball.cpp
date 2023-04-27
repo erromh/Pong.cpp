@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Ball.h"
+#include "LeftPlayer.h"
 
 Ball::Ball(Vector2f start_position, Color ballColor)
 {
@@ -12,21 +13,21 @@ Ball::Ball(Vector2f start_position, Color ballColor)
 	m_CircleShape.setPosition(m_position);
 }
 
-void Ball::ballPosirion()
+void Ball::ballPosition()
 {
 	m_position.x += m_xVelocity;
 	m_position.y += m_yVelocity;
 
 	m_CircleShape.setPosition(m_position);
 
-	if (m_position.x == 0 || m_position.x >= 970)
+
+	if (m_position.x == 0 || m_position.x >= 970 || m_position.x < 0)
 	{
 		m_xVelocity *= -1;
 	}
 
-	//Fix this peace of shit ff
 
-	if (m_position.y >= 530.0 || m_position.y >= 42 || m_position.y < 0)
+	if (m_position.y >= 570.0 || m_position.y < 0)
 	{
 		m_yVelocity *= -1;
 	}

@@ -1,10 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
 using namespace sf;
 
 class Player
 {
+
+private:
+
 	Vector2f m_Leftposition;
 	RectangleShape m_Shape;
 	Color m_Color;

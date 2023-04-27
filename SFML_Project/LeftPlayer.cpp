@@ -1,24 +1,28 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "LeftPlayer.h"
-#define DEBUG
+//#define DEBUG
 
 using namespace std;
 
-LeftPlayer::LeftPlayer(Vector2f start_pos, Color p_color)
+LeftPlayer::LeftPlayer(Color p_color)
 {
-	m_Leftposition.x = start_pos.x;
-	m_Leftposition.y = start_pos.y;
+	
 	m_Color = p_color;
 
 	m_Shape.setFillColor(m_Color);
 	m_Shape.setSize(Vector2f(50, 150));
-	m_Shape.setPosition(m_Leftposition);
+//	m_Shape.setPosition(m_Leftposition);
+	cout << "start position y - " << m_Leftposition.y << endl;
 }
+
+// переделать функции под сеттеры и геттеры 
 
 void LeftPlayer::moveDown()
 {
 	m_Leftposition.y += yLeftVelocity;
+
+	cout << "left Y moveDown() = " << m_Leftposition.y << endl;
 
 	if (m_Leftposition.y >= (450 + yLeftVelocity))
 	{
@@ -36,6 +40,7 @@ void LeftPlayer::moveDown()
 void LeftPlayer::moveUp()
 {
 	m_Leftposition.y -= yLeftVelocity;
+	cout << "left Y moveUp() = " << m_Leftposition.y << endl;
 
 	if (m_Leftposition.y <= -yLeftVelocity)
 	{
@@ -50,25 +55,24 @@ void LeftPlayer::moveUp()
 
 }
 
-// Разобраться с этой фуекцией
-
-void LeftPlayer::update(Time dt)
+float LeftPlayer::getPositionX()
 {
-	if (m_moveUp)
-	{
-		m_Leftposition.y -= yLeftVelocity * dt.asSeconds();
+	return m_Leftposition.x;
+}
 
-		cout << "dt.asSeconds() = " << dt.asSeconds() << endl;
-	}
+void LeftPlayer::setPositionX(float xPos)
+{
+	m_Leftposition.x = xPos;
+}
 
-	if (m_moveDown)
-	{
-		m_Leftposition.y += yLeftVelocity * dt.asSeconds();
-	}
+float LeftPlayer::getPositionY()
+{
+	return m_Leftposition.y;
+}
 
-	m_Shape.setPosition(m_Leftposition);
-
-	cout << "Y = " << m_Leftposition.y << endl << endl;
+void LeftPlayer::setPositionY(float yPos)
+{
+	m_Leftposition.y = yPos;
 }
 
 RectangleShape LeftPlayer::getShape()

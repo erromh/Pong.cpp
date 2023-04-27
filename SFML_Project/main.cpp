@@ -27,9 +27,14 @@ int main()
 	Vector2f rightPosition(950, 225);
 	Vector2f ballPosition(484, 284);
 
-	LeftPlayer leftpl(leftPosition, Color::Red);
+
+	LeftPlayer leftpl(Color::Red);
+	
+	leftpl.setPositionX(0);
+	leftpl.setPositionY(225);
+
 	RightPlayer rightPlayer(rightPosition, Color::Blue); 
-	Ball ball1(ballPosition, Color::Yellow);
+	Ball ball1(ballPosition, Color::Cyan);
 
 	Clock clock;
 	Time dt = clock.restart();
@@ -40,13 +45,13 @@ int main()
 
 		while (window.pollEvent(event))
 		{
-			if (event.type == Event::Closed)
-			{
-				window.close();
-			}
-
 			if (event.type == Event::KeyPressed)
 			{
+				if (event.key.code == Keyboard::Escape)
+				{
+					window.close();
+				}
+
 				if (event.key.code == Keyboard::S)
 				{
 					leftpl.moveDown();
@@ -69,13 +74,13 @@ int main()
 			}
 		}
 
-		ball1.ballPosirion();
+		//ball1.ballPosition();
 
 		window.clear();
 		window.draw(spriteBackgrund);
 		window.draw(leftpl.getShape());
 		window.draw(rightPlayer.getShape());
-		window.draw(ball1.getShape());
+		//window.draw(ball1.getShape());
 		window.display();
 		
 	}

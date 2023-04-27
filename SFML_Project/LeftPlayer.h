@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Player.h"
+#include "Ball.h"
 
 class LeftPlayer : public Player
 {
@@ -14,15 +15,21 @@ private:
 	bool m_moveDown = false;
 	bool m_moveUp = false;
 
-	float yLeftVelocity = 10;
+	float yLeftVelocity = 20;
 
 public:
 	void moveDown();
 	void moveUp();
 	RectangleShape getShape();
-	void update(Time dt);
 
-	LeftPlayer(Vector2f start_pos, Color p_color);
+	float getPositionX();
+	void setPositionX(float xPos);
+
+	float getPositionY();
+	void setPositionY(float yPos);
+
+	LeftPlayer(Color p_color);
+
 };
 
 
