@@ -150,12 +150,14 @@
     <ClCompile Include="LeftPlayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RightPlayer.cpp" />
+    <ClCompile Include="App.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="LeftPlayer.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RightPlayer.h" />
+    <ClInclude Include="App.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

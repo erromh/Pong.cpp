@@ -17,6 +17,8 @@ public:
 	CircleShape getShape();
 	void ballPosition();
 
+	friend class LeftPlayer;
 
+	void checkLeftPlayerPosition();
 };
 

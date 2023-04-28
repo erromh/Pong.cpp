@@ -20,12 +20,10 @@ void Ball::ballPosition()
 
 	m_CircleShape.setPosition(m_position);
 
-
 	if (m_position.x == 0 || m_position.x >= 970 || m_position.x < 0)
 	{
 		m_xVelocity *= -1;
 	}
-
 
 	if (m_position.y >= 570.0 || m_position.y < 0)
 	{
@@ -35,6 +33,16 @@ void Ball::ballPosition()
 	std::cout << "Ball X = " << m_position.x << std::endl;
 	std::cout << "Ball Y = " << m_position.y << std::endl;
 
+}
+
+//сделать столконовение игрока и мяча
+
+void Ball::checkLeftPlayerPosition()
+{
+	/*if (m_position.x == LeftPlayer::getPositionX())
+	{
+
+	}*/
 }
 
 CircleShape Ball::getShape()
