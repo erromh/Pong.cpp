@@ -10,7 +10,11 @@ RightPlayer::RightPlayer(Vector2f start_pos, Color p_color)
 
 	m_Shape.setFillColor(m_Color);
 	m_Shape.setSize(Vector2f(50, 150));
-	m_Shape.setPosition(m_rightPosition);
+
+	setPositionX(start_pos.x);
+	setPositionY(start_pos.y);
+
+	m_Shape.setPosition(getPositionX(), getPositionY());
 }
 
 void RightPlayer::moveDown()
@@ -41,6 +45,26 @@ void RightPlayer::moveUp()
 
 	std::cout << "RIGHT Y moveUp() = " << m_rightPosition.y << std::endl;
 
+}
+
+float RightPlayer::getPositionX()
+{
+	return m_rightPosition.x;
+}
+
+void RightPlayer::setPositionX(float x_PosRight)
+{
+	m_rightPosition.x = x_PosRight;
+}
+
+float RightPlayer::getPositionY()
+{
+	return m_rightPosition.y;
+}
+
+void RightPlayer::setPositionY(float y_PosRight)
+{
+	m_rightPosition.y = y_PosRight;
 }
 
 RectangleShape RightPlayer::getShape()

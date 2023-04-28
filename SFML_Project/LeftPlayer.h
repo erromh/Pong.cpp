@@ -11,10 +11,6 @@ private:
 	Vector2f m_Leftposition;
 	RectangleShape m_Shape;
 	Color m_Color;
-
-	bool m_moveDown = false;
-	bool m_moveUp = false;
-
 	float yLeftVelocity = 20;
 
 public:
@@ -23,12 +19,12 @@ public:
 	RectangleShape getShape();
 
 	float getPositionX();
-	void setPositionX(float xPos);
+	void setPositionX(float x_Pos);
 
 	float getPositionY();
-	void setPositionY(float yPos);
+	void setPositionY(float y_Pos);
 
-	LeftPlayer(Color p_color);
+	LeftPlayer(Vector2f position, Color p_color);
 
 };
 

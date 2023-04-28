@@ -18,5 +18,11 @@ public:
 	void moveUp();
 	RectangleShape getShape();
 	RightPlayer(Vector2f start_pos, Color p_color);
+
+	float getPositionX();
+	void setPositionX(float x_PosRight);
+
+	float getPositionY();
+	void setPositionY(float y_PosRight);
 };
 

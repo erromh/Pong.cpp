@@ -27,13 +27,9 @@ int main()
 	Vector2f rightPosition(950, 225);
 	Vector2f ballPosition(484, 284);
 
+	LeftPlayer leftpl(leftPosition, Color::Red);
 
-	LeftPlayer leftpl(Color::Red);
-	
-	leftpl.setPositionX(0);
-	leftpl.setPositionY(225);
-
-	RightPlayer rightPlayer(rightPosition, Color::Blue); 
+	RightPlayer rightPlayer(rightPosition, Color::Blue);
 	Ball ball1(ballPosition, Color::Cyan);
 
 	Clock clock;
