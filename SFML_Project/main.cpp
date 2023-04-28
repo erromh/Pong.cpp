@@ -1,9 +1,7 @@
-﻿//#include <SFML/Graphics.hpp>
-#include "App.h"
+﻿#include "App.h"
 
 int main()
 {
-
 	App application;
 	application.show();
 

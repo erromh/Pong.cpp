@@ -3,14 +3,18 @@
 #include "Ball.h"
 #include "LeftPlayer.h"
 
-Ball::Ball(Vector2f start_position, Color ballColor)
+Ball::Ball(Vector2f start_position, Vector2f velocity, Color ballColor)
 {
-	m_position.x = start_position.x;
-	m_position.y = start_position.y;
+	setBallPositionX(start_position.x);
+	setBallPositionY(start_position.y);
+
+	setBallVelocityX(velocity.x);
+	setBallVelocityY(velocity.y);
 
 	m_CircleShape.setFillColor(ballColor);
 	m_CircleShape.setRadius(16);
-	m_CircleShape.setPosition(m_position);
+
+	m_CircleShape.setPosition(getBallPositionX(), getBallPositionY());
 }
 
 void Ball::ballPosition()
@@ -35,14 +39,47 @@ void Ball::ballPosition()
 
 }
 
-//сделать столконовение игрока и мяча
+// Get and set ball's X position 
 
-void Ball::checkLeftPlayerPosition()
+float Ball::getBallPositionX()
 {
-	/*if (m_position.x == LeftPlayer::getPositionX())
-	{
+	return m_position.x;
+}
 
-	}*/
+void Ball::setBallPositionX(float ball_x)
+{
+	m_position.x = ball_x;
+}
+
+// Get and set ball's Y position 
+
+float Ball::getBallPositionY()
+{
+	return m_position.y;
+}
+
+void Ball::setBallPositionY(float ball_y)
+{
+	m_position.y = ball_y;
+}
+
+// Get and set ball's X velocity
+
+float Ball::getBallVelocityX()
+{
+	return m_xVelocity;
+}
+
+void Ball::setBallVelocityX(float xVelocity)
+{
+	m_xVelocity = xVelocity;
+}
+
+// Get and set ball's Y velocity
+
+void Ball::setBallVelocityY(float yVelocity)
+{
+	m_yVelocity = yVelocity;
 }
 
 CircleShape Ball::getShape()

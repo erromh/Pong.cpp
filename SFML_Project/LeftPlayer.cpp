@@ -12,7 +12,6 @@ LeftPlayer::LeftPlayer(Vector2f position, Color p_color)
 	m_Shape.setSize(Vector2f(50, 150));
 	
 	setPositionY(position.y);
-
 	setPositionX(position.x);
 	
 	m_Shape.setPosition(getPositionX(), getPositionY());
@@ -22,7 +21,6 @@ LeftPlayer::LeftPlayer(Vector2f position, Color p_color)
 #endif 
 
 }
-
 
 void LeftPlayer::moveDown()
 {
@@ -40,7 +38,6 @@ void LeftPlayer::moveDown()
 #ifdef DEBUG
 	cout << "left Y moveDown() = " << m_Leftposition.y << endl;
 #endif 
-
 }
 
 void LeftPlayer::moveUp()

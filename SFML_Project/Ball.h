@@ -13,12 +13,25 @@ private:
 	float m_yVelocity = 8;
 
 public:
-	Ball(Vector2f, Color);
+	Ball(Vector2f, Vector2f, Color);
 	CircleShape getShape();
 	void ballPosition();
 
 	friend class LeftPlayer;
 
-	void checkLeftPlayerPosition();
+	float getBallPositionX();
+	void setBallPositionX(float ball_x);
+
+	float getBallPositionY();
+	void setBallPositionY(float ball_y);
+
+
+	float getBallVelocityX();
+	void setBallVelocityX(float xVelocity);
+
+	float getBallVelocityY();
+	void setBallVelocityY(float yVelocity);
+
+
 };
 

@@ -11,7 +11,7 @@ private:
 	Vector2f m_Leftposition;
 	RectangleShape m_Shape;
 	Color m_Color;
-	float yLeftVelocity = 20;
+	float yLeftVelocity = 30;
 
 public:
 	void moveDown();

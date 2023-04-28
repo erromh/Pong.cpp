@@ -4,10 +4,8 @@
 
 RightPlayer::RightPlayer(Vector2f start_pos, Color p_color)
 {
-	m_rightPosition.x = start_pos.x;
-	m_rightPosition.y = start_pos.y;
+	
 	m_Color = p_color;
-
 	m_Shape.setFillColor(m_Color);
 	m_Shape.setSize(Vector2f(50, 150));
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <ctime>
 #include "LeftPlayer.h"
 #include "RightPlayer.h"
 #include "Ball.h"
@@ -12,6 +13,12 @@ void App::show()
 {
 	const int WINDOW_HEIGHT = 600;
 	const int WINDOW_WIDTH = 1000;
+
+	srand(time(NULL));
+
+	float ballPosX = rand() % 990;
+	float ballPosY = rand() % 580;
+
 
 	RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), " ", Style::None);
 	window.setFramerateLimit(60);
@@ -26,12 +33,15 @@ void App::show()
 
 	Vector2f leftPosition(0, 225);
 	Vector2f rightPosition(950, 225);
-	Vector2f ballPosition(484, 284);
+
+	Vector2f ballPosition(ballPosX, ballPosY);
+	Vector2f ballVelocity(8, 8);
 
 	LeftPlayer leftpl(leftPosition, Color::Red);
 
 	RightPlayer rightPlayer(rightPosition, Color::Blue);
-	Ball ball1(ballPosition, Color::Cyan);
+
+	Ball ball1(ballPosition, ballVelocity, Color::Cyan);
 
 	Clock clock;
 	Time dt = clock.restart();
@@ -69,15 +79,19 @@ void App::show()
 					rightPlayer.moveDown();
 				}
 			}
+
 		}
 
-		//ball1.ballPosition();
+
+		ball1.ballPosition();
+
+		cout << leftpl.getPositionY() << endl;
 
 		window.clear();
 		window.draw(spriteBackgrund);
 		window.draw(leftpl.getShape());
 		window.draw(rightPlayer.getShape());
-		//window.draw(ball1.getShape());
+		window.draw(ball1.getShape());
 		window.display();
 
 	}

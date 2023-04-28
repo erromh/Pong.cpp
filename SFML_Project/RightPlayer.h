@@ -4,7 +4,6 @@
 
 class RightPlayer : public Player
 {
-
 private:
 
 	Vector2f m_rightPosition;
