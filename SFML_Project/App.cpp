@@ -8,16 +8,6 @@
 
 using namespace sf;
 
-//bool App::checkPlayerCollision(Ball& ball, LeftPlayer& leftplayer, RightPlayer& rightPlayer)
-//{
-//	if (leftplayer.m_Leftposition.x == ball.m_position.x)
-//	{
-//		return true;
-//	}
-//
-//	return false;
-//}
-
 void App::show()
 {
 	using namespace std;
@@ -95,7 +85,7 @@ void App::show()
 
 				if (event.key.code == Keyboard::Q)
 				{
-					//ball1.ballPosition(leftpl);
+					ball1.printBallLeft(ball1);
 				}
 			}
 		}

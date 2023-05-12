@@ -25,9 +25,6 @@ void RightPlayer::moveDown()
 		moveUp();
 	}
 	m_Shape.setPosition(m_rightPosition);
-
-	std::cout << "RIGHT Y moveDown() = " << m_rightPosition.y << std::endl;
-
 }
 
 void RightPlayer::moveUp()
@@ -40,9 +37,6 @@ void RightPlayer::moveUp()
 		moveDown();
 	}
 	m_Shape.setPosition(m_rightPosition);
-
-	std::cout << "RIGHT Y moveUp() = " << m_rightPosition.y << std::endl;
-
 }
 
 float RightPlayer::getPositionX()

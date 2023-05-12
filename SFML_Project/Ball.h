@@ -7,6 +7,7 @@ using namespace sf;
 class Ball
 {
 	friend class LeftPlayer;
+	friend class RightPlayer;
 	friend class App;
 
 private:
@@ -35,5 +36,7 @@ public:
 
 	float getBallVelocityY();
 	void setBallVelocityY(float yVelocity);
+
+	void printBallLeft(Ball const& ball);
 };
 

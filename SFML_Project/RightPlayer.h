@@ -4,6 +4,9 @@
 
 class RightPlayer : public Player
 {
+	friend class Ball;
+	friend class App;
+
 private:
 
 	Vector2f m_rightPosition;
