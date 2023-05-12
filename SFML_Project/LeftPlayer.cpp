@@ -26,8 +26,6 @@ void LeftPlayer::moveDown()
 {
 	m_Leftposition.y += yLeftVelocity;
 
-	cout << "left Y moveDown() = " << m_Leftposition.y << endl;
-
 	if (m_Leftposition.y >= (450 + yLeftVelocity))
 	{
 		m_Shape.setPosition(m_Leftposition);
@@ -43,8 +41,7 @@ void LeftPlayer::moveDown()
 void LeftPlayer::moveUp()
 {
 	m_Leftposition.y -= yLeftVelocity;
-	cout << "left Y moveUp() = " << m_Leftposition.y << endl;
-
+	
 	if (m_Leftposition.y <= -yLeftVelocity)
 	{
 		m_Shape.setPosition(m_Leftposition);
@@ -58,6 +55,8 @@ void LeftPlayer::moveUp()
 
 }
 
+// set and get X position
+
 float LeftPlayer::getPositionX()
 {
 	return m_Leftposition.x;
@@ -67,6 +66,8 @@ void LeftPlayer::setPositionX(float x_Pos)
 {
 	m_Leftposition.x = x_Pos;
 }
+
+// set and get Y position
 
 float LeftPlayer::getPositionY()
 {
@@ -78,6 +79,9 @@ void LeftPlayer::setPositionY(float y_Pos)
 	m_Leftposition.y = y_Pos;
 	cout << "setPosition y = " << m_Leftposition.y << endl;
 }
+
+// set and get size
+
 
 RectangleShape LeftPlayer::getShape()
 {

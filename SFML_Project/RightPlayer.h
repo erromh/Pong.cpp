@@ -9,7 +9,7 @@ private:
 	Vector2f m_rightPosition;
 	RectangleShape m_Shape;
 	Color m_Color;
-	float yRightVelocity = 10;
+	float yRightVelocity = 30;
 
 public:
 

@@ -1,12 +1,16 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "LeftPlayer.h"
+#include "RightPlayer.h"
 using namespace sf;
 
 class Ball
 {
+	friend class LeftPlayer;
+	friend class App;
+
 private:
-	CircleShape m_CircleShape;
+	RectangleShape m_ballShape;
 	Vector2f m_position;
 
 	float m_xVelocity = 8;
@@ -14,10 +18,11 @@ private:
 
 public:
 	Ball(Vector2f, Vector2f, Color);
-	CircleShape getShape();
-	void ballPosition();
 
-	friend class LeftPlayer;
+	RectangleShape getShape();
+	void ballPosition(LeftPlayer const& leftplayer);
+
+	void CheckPaddleCollision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer const& rightplayer);
 
 	float getBallPositionX();
 	void setBallPositionX(float ball_x);
@@ -25,13 +30,10 @@ public:
 	float getBallPositionY();
 	void setBallPositionY(float ball_y);
 
-
 	float getBallVelocityX();
 	void setBallVelocityX(float xVelocity);
 
 	float getBallVelocityY();
 	void setBallVelocityY(float yVelocity);
-
-
 };
 

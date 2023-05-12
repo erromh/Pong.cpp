@@ -7,39 +7,53 @@
 #include "App.h"
 
 using namespace sf;
-using namespace std;
+
+//bool App::checkPlayerCollision(Ball& ball, LeftPlayer& leftplayer, RightPlayer& rightPlayer)
+//{
+//	if (leftplayer.m_Leftposition.x == ball.m_position.x)
+//	{
+//		return true;
+//	}
+//
+//	return false;
+//}
 
 void App::show()
 {
+	using namespace std;
+
 	const int WINDOW_HEIGHT = 600;
 	const int WINDOW_WIDTH = 1000;
 
 	srand(time(NULL));
 
-	float ballPosX = rand() % 990;
+	float ballPosX = rand() % 990 - 50;
 	float ballPosY = rand() % 580;
 
-
-	RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), " ", Style::None);
+	RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), " ", Style::Default);
 	window.setFramerateLimit(60);
 
 	Texture textureBackGround;
 	textureBackGround.loadFromFile("D:/c++++/SFML_Project/Background.png");
 
 	Sprite spriteBackgrund;
-
 	spriteBackgrund.setTexture(textureBackGround);
 	spriteBackgrund.setPosition(0, 0);
 
-	Vector2f leftPosition(0, 225);
-	Vector2f rightPosition(950, 225);
 
+	Vector2f leftPosition(0, 225);
+	Vector2f leftSize(0, 150);
+
+	// Don't forget -  rightPosition(950, 225)
+
+	Vector2f rightPosition(950, 225);
 	Vector2f ballPosition(ballPosX, ballPosY);
 	Vector2f ballVelocity(8, 8);
 
-	LeftPlayer leftpl(leftPosition, Color::Red);
 
-	RightPlayer rightPlayer(rightPosition, Color::Blue);
+	LeftPlayer leftpl(leftPosition, Color::Yellow);
+
+	RightPlayer rightPlayer(rightPosition, Color::Red);
 
 	Ball ball1(ballPosition, ballVelocity, Color::Cyan);
 
@@ -78,14 +92,17 @@ void App::show()
 				{
 					rightPlayer.moveDown();
 				}
-			}
 
+				if (event.key.code == Keyboard::Q)
+				{
+					//ball1.ballPosition(leftpl);
+				}
+			}
 		}
 
+		ball1.ballPosition(leftpl);
 
-		ball1.ballPosition();
-
-		cout << leftpl.getPositionY() << endl;
+		ball1.CheckPaddleCollision(ball1, leftpl, rightPlayer);
 
 		window.clear();
 		window.draw(spriteBackgrund);
@@ -95,4 +112,5 @@ void App::show()
 		window.display();
 
 	}
+	
 }
