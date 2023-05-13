@@ -79,52 +79,59 @@ void Ball::CheckPaddleCollision(Ball const& ball, LeftPlayer const& leftplayer, 
 	{
 		m_xVelocity *= -1;
 
+
 		std::cout << "Lefttplayer top = " << leftplayer.m_Shape.getGlobalBounds().top << std::endl;
 
 		std::cout << "Rightplayer top = " << rightplayer.m_Shape.getGlobalBounds().top << std::endl;
 
 		std::cout << "Rightplayer height = " << rightplayer.m_Shape.getGlobalBounds().height << std::endl;
 
-		std::cout << "Rightplayer top + height = " << rightplayer.m_Shape.getGlobalBounds().top + rightplayer.m_Shape.getGlobalBounds().height << std::endl;
+		//std::cout << "Rightplayer top + height = " << rightplayer.m_Shape.getGlobalBounds().top + rightplayer.m_Shape.getGlobalBounds().height << std::endl;
 
 		std::cout << "Rightplayer left = " << rightplayer.m_Shape.getGlobalBounds().left << std::endl;
+
+		std::cout << "Rightplayer left position (X) = " << rightplayer.m_rightPosition.x << std::endl;
 
 		std::cout << "Rightplayer left + width = " << rightplayer.m_Shape.getGlobalBounds().left
 			+ rightplayer.m_Shape.getGlobalBounds().width << std::endl;
 
-		std::cout << "Rightplayer top + wigth = " << rightplayer.m_Shape.getGlobalBounds().top + 
-			rightplayer.m_Shape.getGlobalBounds().width << std::endl;
+		std::cout << "Rightplayer top + wigth = " << rightplayer.m_Shape.getGlobalBounds().top +
+			rightplayer.m_Shape.getGlobalBounds().width << std::endl << std::endl;
 
+		//std::cout << "Rightplayer contains = " << rightplayer.m_Shape.getGlobalBounds() << std::endl;
 	}
 
 
+	// right collision 
 
-	// right collision X
+	bool rightCollisionX = (ball.m_ballShape.getGlobalBounds().left + ball.m_ballShape.getGlobalBounds().width
 
-	bool xOverlapRight = (rightplayer.m_Shape.getGlobalBounds().left >= 
-		
-		ball.m_ballShape.getGlobalBounds().left + ball.m_ballShape.getGlobalBounds().width) &&
-
-		(ball.m_ballShape.getGlobalBounds().left <= rightplayer.m_Shape.getGlobalBounds().left + rightplayer.m_Shape.getGlobalBounds().width);
-
-	// right collision Y
-
-	bool yOverlapRight = (rightplayer.m_Shape.getGlobalBounds().top + rightplayer.m_Shape.getGlobalBounds().height <= 
-		
-		ball.m_ballShape.getGlobalBounds().left) &&
-
-		(ball.m_ballShape.getGlobalBounds().top + ball.m_ballShape.getGlobalBounds().height <= rightplayer.m_Shape.getGlobalBounds().top);
+		>= rightplayer.m_Shape.getGlobalBounds().left);
 
 
-	if (xOverlapRight && yOverlapRight)
+	bool rightCollisionY = (rightplayer.m_Shape.getGlobalBounds().top + rightplayer.m_Shape.getGlobalBounds().height
+
+		>= ball.m_ballShape.getGlobalBounds().top) &&
+
+		(ball.m_ballShape.getGlobalBounds().top + ball.m_ballShape.getGlobalBounds().height >= rightplayer.m_Shape.getGlobalBounds().top);
+
+
+	if (rightCollisionX && rightCollisionY)
 	{
 		std::cout << "Right collision is works\n\n";
+
+		m_xVelocity *= -1;
 	}
 }
 
 void Ball::printBallLeft(Ball const& ball)
 {
-	std::cout << "ball.left = " << ball.m_ballShape.getGlobalBounds().left << std::endl << std::endl;
+	std::cout << "\nBall.left (X) = " << ball.m_ballShape.getGlobalBounds().left << std::endl;
+	std::cout << "Ball.top (Y) = " << ball.m_ballShape.getGlobalBounds().top << std::endl;
+	std::cout << "Ball position X = " << ball.m_position.x << std::endl;
+	std::cout << "Ball position Y = " << ball.m_position.y << std::endl;
+
+	std::cout << "Ball.width = " << ball.m_ballShape.getGlobalBounds().width << std::endl << std::endl;
 }
 
 // Get and set ball's X position 

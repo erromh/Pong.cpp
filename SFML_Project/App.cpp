@@ -71,6 +71,8 @@ void App::show()
 				if (event.key.code == Keyboard::W)
 				{
 					leftpl.moveUp();
+					//ball1.ballPosition(leftpl);
+
 				}
 
 				if (event.key.code == Keyboard::Up)
