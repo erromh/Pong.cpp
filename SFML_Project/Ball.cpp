@@ -22,6 +22,7 @@ Ball::Ball(Vector2f start_position, Vector2f velocity, Color ballColor)
 void Ball::ballMoving(LeftPlayer const& leftplayer)
 {
 	m_position.x += m_xVelocity;
+
 	m_position.y += m_yVelocity;
 
 	if ((m_position.x + 32) > 1000 || (m_position.x) < 0)
@@ -36,16 +37,15 @@ void Ball::ballMoving(LeftPlayer const& leftplayer)
 		std::cout << "End game Y\n";
 	}
 
-	//m_position.x;
-
 	m_ballShape.setPosition(m_position);
-
 }
 
 // Checking collisions
 
 void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer const& rightplayer)
 {
+	// you must make collision in top adn bottom
+
 	if (leftplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
 	{
 		m_xVelocity *= -1;
