@@ -21,9 +21,10 @@ public:
 	Ball(Vector2f, Vector2f, Color);
 
 	RectangleShape getShape();
-	void ballPosition(LeftPlayer const& leftplayer);
 
-	void CheckPaddleCollision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer const& rightplayer);
+	void ballMoving(LeftPlayer const& leftplayer);
+
+	void Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer const& rightplayer);
 
 	float getBallPositionX();
 	void setBallPositionX(float ball_x);

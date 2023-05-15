@@ -17,7 +17,7 @@ void App::show()
 
 	srand(time(NULL));
 
-	float ballPosX = rand() % 990 - 50;
+	float ballPosX = rand() % 1000 - 100;
 	float ballPosY = rand() % 580;
 
 	RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), " ", Style::Default);
@@ -34,21 +34,26 @@ void App::show()
 	Vector2f leftPosition(0, 225);
 	Vector2f leftSize(0, 150);
 
-	// Don't forget -  rightPosition(950, 225)
+	// Don't forget -  rightPosition(950, 225);
+	
+	Color colorleft(255, 255, 0);
+	LeftPlayer leftpl(leftPosition, colorleft);
 
+
+	Color colorRight(0, 255, 0);
 	Vector2f rightPosition(950, 225);
+	RightPlayer rightPlayer(rightPosition, colorRight);
+
+
 	Vector2f ballPosition(ballPosX, ballPosY);
 	Vector2f ballVelocity(8, 8);
+	Color colorBall(0, 255, 255);
+	Ball ball1(ballPosition, ballVelocity, colorBall);
 
-
-	LeftPlayer leftpl(leftPosition, Color::Yellow);
-
-	RightPlayer rightPlayer(rightPosition, Color::Red);
-
-	Ball ball1(ballPosition, ballVelocity, Color::Cyan);
 
 	Clock clock;
 	Time dt = clock.restart();
+
 
 	while (window.isOpen())
 	{
@@ -71,8 +76,6 @@ void App::show()
 				if (event.key.code == Keyboard::W)
 				{
 					leftpl.moveUp();
-					//ball1.ballPosition(leftpl);
-
 				}
 
 				if (event.key.code == Keyboard::Up)
@@ -88,13 +91,14 @@ void App::show()
 				if (event.key.code == Keyboard::Q)
 				{
 					ball1.printBallLeft(ball1);
+					//ball1.ballMoving(leftpl);
 				}
 			}
 		}
 
-		ball1.ballPosition(leftpl);
+		ball1.ballMoving(leftpl);
 
-		ball1.CheckPaddleCollision(ball1, leftpl, rightPlayer);
+		ball1.Collision(ball1, leftpl, rightPlayer);
 
 		window.clear();
 		window.draw(spriteBackgrund);
