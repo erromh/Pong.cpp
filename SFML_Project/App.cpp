@@ -17,7 +17,7 @@ void App::show()
 
 	srand(time(NULL));
 
-	float ballPosX = rand() % 1000 - 100;
+	float ballPosX = rand() % 940;
 	float ballPosY = rand() % 580;
 
 	RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), " ", Style::Default);
@@ -90,7 +90,7 @@ void App::show()
 
 				if (event.key.code == Keyboard::Q)
 				{
-					ball1.printBallLeft(ball1);
+					ball1.printBallLeft(ball1, leftpl);
 					//ball1.ballMoving(leftpl);
 				}
 			}

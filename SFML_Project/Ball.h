@@ -19,6 +19,7 @@ private:
 
 public:
 	Ball(Vector2f, Vector2f, Color);
+	~Ball();
 
 	RectangleShape getShape();
 
@@ -38,6 +39,8 @@ public:
 	float getBallVelocityY();
 	void setBallVelocityY(float yVelocity);
 
-	void printBallLeft(Ball const& ball);
+	void printBallLeft(Ball const& ball, LeftPlayer const& leftplayer);
+
+	void endGame();
 };
 
