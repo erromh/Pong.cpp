@@ -41,6 +41,6 @@ public:
 
 	void printBallLeft(Ball const& ball, LeftPlayer const& leftplayer);
 
-	void endGame();
+	void gameOver();
 };
 

@@ -36,14 +36,12 @@ void App::show()
 
 	// Don't forget -  rightPosition(950, 225);
 	
-	Color colorleft(255, 255, 0);
+	Color colorleft(0, 0, 255);
 	LeftPlayer leftpl(leftPosition, colorleft);
 
-
-	Color colorRight(0, 255, 0);
+	Color colorRight(0, 0, 255);
 	Vector2f rightPosition(950, 225);
 	RightPlayer rightPlayer(rightPosition, colorRight);
-
 
 	Vector2f ballPosition(ballPosX, ballPosY);
 	Vector2f ballVelocity(8, 8);

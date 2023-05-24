@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <stdlib.h>
 #include "Ball.h"
 #include "LeftPlayer.h"
 #include "RightPlayer.h"
@@ -33,15 +34,15 @@ void Ball::ballMoving(LeftPlayer const& leftplayer)
 	if ((m_position.x + 32) > 1000 || (m_position.x) < 0)
 	{
 		m_xVelocity *= -1;
-		//std::cout << "End game X\n";
+		gameOver();
 	}
 
 	if ((m_position.y) > 570 || (m_position.y) < 0)
 	{
 		m_yVelocity *= -1;
-		//std::cout << "End game Y\n";
+//		gameOver();
 	}
-
+	
 	m_ballShape.setPosition(m_position);
 }
 
@@ -49,33 +50,43 @@ void Ball::ballMoving(LeftPlayer const& leftplayer)
 
 void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer const& rightplayer)
 {
+	// Left player collision
 
-	// Left collision
+
+	//if (rect1.getGlobalBounds().intersects(rect2.getGlobalBounds()))
+	//{
+	//	if (rect1.getPosition().y + rect1.getSize().y <= rect2.getPosition().y)
+	//	{
+	//		// ¬ерхн€€ сторона rect1 столкнулась с нижней стороной rect2
+	//	}
+	//}
+
+	/*if (ball.m_ballShape.getGlobalBounds().intersects(leftplayer.m_Shape.getGlobalBounds()))
+	{
+		if (ball.m_ballShape.getPosition().y + ball.m_ballShape.getSize().y <= (leftplayer.m_Shape.getPosition().y))
+		{
+			m_xVelocity *= -1;
+		}
+	}*/
 	
-	bool xOverlapLeft = (leftplayer.m_Shape.getGlobalBounds().left + leftplayer.m_Shape.getGlobalBounds().width
+	bool leftCollisionX = (leftplayer.m_Shape.getGlobalBounds().left + leftplayer.m_Shape.getGlobalBounds().width
 
 		>= ball.m_ballShape.getGlobalBounds().left) &&
 
 		(ball.m_ballShape.getGlobalBounds().left + ball.m_ballShape.getGlobalBounds().width >= leftplayer.m_Shape.getGlobalBounds().left);
 
 
-
-	bool yOverlapLeft = (leftplayer.m_Shape.getGlobalBounds().top + leftplayer.m_Shape.getGlobalBounds().height
+	bool leftCollisionY = (leftplayer.m_Shape.getGlobalBounds().top + leftplayer.m_Shape.getGlobalBounds().height
 
 		>= ball.m_ballShape.getGlobalBounds().top) &&
 		
 		(ball.m_ballShape.getGlobalBounds().top + ball.m_ballShape.getGlobalBounds().height >= leftplayer.m_Shape.getGlobalBounds().top);
 
 
-	if (xOverlapLeft && yOverlapLeft)
+	if (leftCollisionX && leftCollisionY)
 	{
 		m_yVelocity *= -1;
 		std::cout << "Top collision works\n";
-	}
-
-	else
-	{
-		m_xVelocity *= 1;
 	}
 
 	if (leftplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
@@ -83,6 +94,9 @@ void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer
 		m_xVelocity *= -1;
 		std::cout << "Left collosion\n";
 	}
+
+	
+
 
 
 	// Right collision
@@ -97,6 +111,7 @@ void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer
 
 		(ball.m_ballShape.getGlobalBounds().top + ball.m_ballShape.getGlobalBounds().height >= rightplayer.m_Shape.getGlobalBounds().top);
 
+	   
 	if (rightCollisionX && rightCollisionY)
 	{
 		m_xVelocity *= -1;
@@ -107,14 +122,32 @@ void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer
 	if (rightplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
 	{
 		m_yVelocity *= -1;
-		std::cout << "Right collision\n";
+		std::cout << "Right collision \n";
 	}
 }
 
 
-void Ball::endGame()
+void Ball::gameOver()
 {
-	
+	// 1) Stop tha ball
+	// 2) Display an insciption that the game is over
+	// 3) Indicate who won
+	// 4) Restart the game (button maybe. think about it !!!)
+
+
+	/*setBallVelocityX(0);*/
+	//setBallVelocityY(0);
+
+	/*setBallPositionX(100);
+	setBallPositionY(160);*/
+
+	RectangleShape gameOverRect;
+
+	gameOverRect.setSize(Vector2f(500, 100));
+	gameOverRect.setFillColor(Color::Green);
+
+
+	std::cout << "Game over\n";
 }
 
 void Ball::printBallLeft(Ball const& ball, LeftPlayer const& leftplayer)
