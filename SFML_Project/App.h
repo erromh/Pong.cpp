@@ -1,4 +1,7 @@
 #pragma once
+#include <SFML/Graphics.hpp>
+using namespace sf;
+
 class App
 {
 	friend class Leftplayer;
@@ -6,7 +9,12 @@ class App
 	friend class Ball;
 
 public:
-	void show();
-	//bool checkPlayerCollision(Ball& ball, LeftPlayer& leftplayer, RightPlayer& rightPlayer);
+	void show(RenderWindow & window) const;
+
+private:
+	//RenderWindow window(VideoMode(1000, 600), " ", Style::Default);
+
+	std::unique_ptr<RenderWindow> window = std::make_unique<RenderWindow>();
+
 };
 

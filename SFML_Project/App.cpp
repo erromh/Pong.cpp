@@ -8,19 +8,15 @@
 
 using namespace sf;
 
-void App::show()
+void App::show(RenderWindow & window) const
 {
 	using namespace std;
-
-	const int WINDOW_HEIGHT = 600;
-	const int WINDOW_WIDTH = 1000;
 
 	srand(time(NULL));
 
 	float ballPosX = rand() % 940;
 	float ballPosY = rand() % 580;
 
-	RenderWindow window(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), " ", Style::Default);
 	window.setFramerateLimit(60);
 
 	Texture textureBackGround;
@@ -29,7 +25,6 @@ void App::show()
 	Sprite spriteBackgrund;
 	spriteBackgrund.setTexture(textureBackGround);
 	spriteBackgrund.setPosition(0, 0);
-
 
 	Vector2f leftPosition(0, 225);
 	Vector2f leftSize(0, 150);
@@ -47,12 +42,7 @@ void App::show()
 	Vector2f ballVelocity(8, 8);
 	Color colorBall(0, 255, 255);
 	Ball ball1(ballPosition, ballVelocity, colorBall);
-
-
-	Clock clock;
-	Time dt = clock.restart();
-
-
+	
 	while (window.isOpen())
 	{
 		Event event;
@@ -95,7 +85,6 @@ void App::show()
 		}
 
 		ball1.ballMoving(leftpl);
-
 		ball1.Collision(ball1, leftpl, rightPlayer);
 
 		window.clear();

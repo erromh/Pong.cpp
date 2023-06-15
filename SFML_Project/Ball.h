@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <memory>
 #include "LeftPlayer.h"
 #include "RightPlayer.h"
 using namespace sf;
@@ -13,6 +14,7 @@ class Ball
 private:
 	RectangleShape m_ballShape;
 	Vector2f m_position;
+
 
 	float m_xVelocity = 8;
 	float m_yVelocity = 8;
@@ -41,6 +43,6 @@ public:
 
 	void printBallLeft(Ball const& ball, LeftPlayer const& leftplayer);
 
-	void gameOver();
+	bool gameOver();
 };
 

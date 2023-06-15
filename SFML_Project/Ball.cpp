@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
+#include <memory>
 #include "Ball.h"
 #include "LeftPlayer.h"
 #include "RightPlayer.h"
@@ -34,17 +35,17 @@ void Ball::ballMoving(LeftPlayer const& leftplayer)
 	if ((m_position.x + 32) > 1000 || (m_position.x) < 0)
 	{
 		m_xVelocity *= -1;
-		gameOver();
+		//gameOver();
 	}
 
 	if ((m_position.y) > 570 || (m_position.y) < 0)
 	{
 		m_yVelocity *= -1;
-//		gameOver();
 	}
 	
 	m_ballShape.setPosition(m_position);
 }
+
 
 // Checking collisions
 
@@ -85,7 +86,7 @@ void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer
 
 	if (leftCollisionX && leftCollisionY)
 	{
-		m_yVelocity *= -1;
+		m_xVelocity *= -1;
 		std::cout << "Top collision works\n";
 	}
 
@@ -94,9 +95,6 @@ void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer
 		m_xVelocity *= -1;
 		std::cout << "Left collosion\n";
 	}
-
-	
-
 
 
 	// Right collision
@@ -112,42 +110,41 @@ void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer
 		(ball.m_ballShape.getGlobalBounds().top + ball.m_ballShape.getGlobalBounds().height >= rightplayer.m_Shape.getGlobalBounds().top);
 
 	   
-	if (rightCollisionX && rightCollisionY)
+	//if (rightCollisionX && rightCollisionY)
+	//{
+	//	m_xVelocity *= -1;
+	//	std::cout << "Top and bottom right collision\n";
+	//}
+
+
+	if (rightplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds())
+		&& (rightCollisionX && rightCollisionY))
 	{
 		m_xVelocity *= -1;
-		std::cout << "Top and bottom right collision\n";
-	}
-
-
-	if (rightplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
-	{
-		m_yVelocity *= -1;
-		std::cout << "Right collision \n";
+		std::cout << "Right collision getGlobalBounds()\n";
 	}
 }
 
 
-void Ball::gameOver()
+bool Ball::gameOver()
 {
-	// 1) Stop tha ball
-	// 2) Display an insciption that the game is over
-	// 3) Indicate who won
-	// 4) Restart the game (button maybe. think about it !!!)
+	/* 
+	 1) Stop tha ball
+	 2) Display an insciption that the game is over
+	 3) Indicate who won
+	 4) Restart the game (button maybe. think about it !!!)
+	 */
 
+	setBallVelocityX(0);
+	setBallVelocityY(0);
 
-	/*setBallVelocityX(0);*/
-	//setBallVelocityY(0);
+	//void LeftPlayer::getPositionX()
 
-	/*setBallPositionX(100);
-	setBallPositionY(160);*/
-
-	RectangleShape gameOverRect;
-
-	gameOverRect.setSize(Vector2f(500, 100));
-	gameOverRect.setFillColor(Color::Green);
-
+	m_ballShape.setFillColor(Color::Transparent);
 
 	std::cout << "Game over\n";
+
+	return true;
 }
 
 void Ball::printBallLeft(Ball const& ball, LeftPlayer const& leftplayer)
