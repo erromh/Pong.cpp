@@ -2,12 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include "RightPlayer.h"
 
-RightPlayer::RightPlayer(Vector2f start_pos, Color p_color)
+RightPlayer::RightPlayer(Vector2f const& size,Vector2f const& start_pos, Color const& p_color)
 {
-	
 	m_Color = p_color;
 	m_Shape.setFillColor(m_Color);
-	m_Shape.setSize(Vector2f(50, 150));
+	m_Shape.setSize(size);
 
 	setPositionX(start_pos.x);
 	setPositionY(start_pos.y);
@@ -15,26 +14,26 @@ RightPlayer::RightPlayer(Vector2f start_pos, Color p_color)
 	m_Shape.setPosition(getPositionX(), getPositionY());
 }
 
-void RightPlayer::moveDown()
+void RightPlayer::moveDown(RenderWindow const& window)
 {
 	m_rightPosition.y += yRightVelocity;
 
 	if (m_rightPosition.y >= (450 + yRightVelocity))
 	{
 		m_Shape.setPosition(m_rightPosition);
-		moveUp();
+		/*moveUp();*/
 	}
 	m_Shape.setPosition(m_rightPosition);
 }
 
-void RightPlayer::moveUp()
+void RightPlayer::moveUp(RenderWindow const& window)
 {
 	m_rightPosition.y -= yRightVelocity;
 
 	if (m_rightPosition.y <= -yRightVelocity)
 	{
 		m_Shape.setPosition(m_rightPosition);
-		moveDown();
+		//moveDown();
 	}
 	m_Shape.setPosition(m_rightPosition);
 }

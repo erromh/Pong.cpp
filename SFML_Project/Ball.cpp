@@ -6,11 +6,8 @@
 #include "LeftPlayer.h"
 #include "RightPlayer.h"
 
-Ball::Ball(Vector2f start_position, Vector2f velocity, Color ballColor)
+Ball::Ball(Vector2f velocity, Color ballColor)
 {
-	setBallPositionX(start_position.x);
-	setBallPositionY(start_position.y);
-
 	m_ballShape.setSize(Vector2f(32, 32));
 
 	setBallVelocityX(velocity.x);
@@ -26,19 +23,18 @@ Ball::~Ball()
 	std::cout << "destructor called\n";
 }
 
-void Ball::ballMoving(LeftPlayer const& leftplayer)
+void Ball::ballMoving(Ball const& ball, RenderWindow const & window)
 {
 	m_position.x += m_xVelocity;
-
 	m_position.y += m_yVelocity;
 
-	if ((m_position.x + 32) > 1000 || (m_position.x) < 0)
+	if ((m_position.x + ball.m_ballShape.getGlobalBounds().width) > window.getSize().x || (m_position.x) < 0)
 	{
 		m_xVelocity *= -1;
 		//gameOver();
 	}
 
-	if ((m_position.y) > 570 || (m_position.y) < 0)
+	if ((m_position.y) > (window.getSize().y - ball.m_ballShape.getGlobalBounds().width) || (m_position.y) < 0)
 	{
 		m_yVelocity *= -1;
 	}
@@ -68,7 +64,6 @@ void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer
 	}
 }
 
-
 bool Ball::gameOver()
 {
 	/* 
@@ -92,14 +87,12 @@ bool Ball::gameOver()
 
 void Ball::printBallLeft(Ball const& ball, LeftPlayer const& leftplayer)
 {
-	std::cout << "\nBall.left (X) = " << ball.m_ballShape.getGlobalBounds().left << std::endl;
-	std::cout << "Ball.top (Y) = " << ball.m_ballShape.getGlobalBounds().top << std::endl;
-	std::cout << "Ball position X = " << ball.m_position.x << std::endl;
-	std::cout << "Ball position Y = " << ball.m_position.y << std::endl;
+	std::cout << "\nPlayer width = " << leftplayer.m_Shape.getGlobalBounds().width << std::endl;
 	std::cout << "Ball.width = " << ball.m_ballShape.getGlobalBounds().width << std::endl;
 	std::cout << "Ball.Left + width = " << ball.m_ballShape.getGlobalBounds().left + 
 		ball.m_ballShape.getGlobalBounds().width << std::endl;
 	std::cout << "LeftPlayer.left = " << leftplayer.m_Shape.getGlobalBounds().left << std::endl;
+	std::cout << "Ball::getBallPositionX() = " << Ball::getBallPositionX() << std::endl;
 }
 
 // Get and set ball's X position 
@@ -109,7 +102,7 @@ float Ball::getBallPositionX()
 	return m_position.x;
 }
 
-void Ball::setBallPositionX(float ball_x)
+void Ball::setBallPositionX(float const& ball_x)
 {
 	m_position.x = ball_x;
 }
@@ -121,7 +114,7 @@ float Ball::getBallPositionY()
 	return m_position.y;
 }
 
-void Ball::setBallPositionY(float ball_y)
+void Ball::setBallPositionY(float const& ball_y)
 {
 	m_position.y = ball_y;
 }

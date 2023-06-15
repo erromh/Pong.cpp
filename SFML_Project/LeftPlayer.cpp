@@ -5,11 +5,11 @@
 
 using namespace std;
 
-LeftPlayer::LeftPlayer(Vector2f position, Color p_color)
+LeftPlayer::LeftPlayer(Vector2f const& size, Vector2f const& position, Color const& p_color)
 {
 	m_Color = p_color;
 	m_Shape.setFillColor(m_Color);
-	m_Shape.setSize(Vector2f(50, 150));
+	m_Shape.setSize(size);
 	
 	setPositionY(position.y);
 	setPositionX(position.x);
@@ -22,15 +22,15 @@ LeftPlayer::LeftPlayer(Vector2f position, Color p_color)
 
 }
 
-void LeftPlayer::moveDown()
+void LeftPlayer::moveDown(RenderWindow const& window)
 {
 	m_Leftposition.y += yLeftVelocity;
 
-	if (m_Leftposition.y >= (450 + yLeftVelocity))
-	{
-		m_Shape.setPosition(m_Leftposition);
-		moveUp();
-	}
+	//if (m_Leftposition.y >= ((window.getSize().y - m_Shape.getGlobalBounds().height) + yLeftVelocity))
+	//{
+	//	m_Shape.setPosition(m_Leftposition);
+	//	moveUp();
+	//}
 	m_Shape.setPosition(m_Leftposition);
 
 #ifdef DEBUG
@@ -38,14 +38,14 @@ void LeftPlayer::moveDown()
 #endif 
 }
 
-void LeftPlayer::moveUp()
+void LeftPlayer::moveUp(RenderWindow const& window)
 {
 	m_Leftposition.y -= yLeftVelocity;
 	
 	if (m_Leftposition.y <= -yLeftVelocity)
 	{
 		m_Shape.setPosition(m_Leftposition);
-		moveDown();
+		//moveDown();
 	}
 	m_Shape.setPosition(m_Leftposition);
 
@@ -81,7 +81,6 @@ void LeftPlayer::setPositionY(float y_Pos)
 }
 
 // set and get size
-
 
 RectangleShape LeftPlayer::getShape()
 {

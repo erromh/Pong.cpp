@@ -19,20 +19,20 @@ private:
 	float m_yVelocity = 8;
 
 public:
-	Ball(Vector2f, Vector2f, Color);
+	Ball(Vector2f, Color);
 	~Ball();
 
 	RectangleShape getShape();
 
-	void ballMoving(LeftPlayer const& leftplayer);
+	void ballMoving(Ball const& ball, RenderWindow const & window);
 
 	void Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer const& rightplayer);
 
 	float getBallPositionX();
-	void setBallPositionX(float ball_x);
+	void setBallPositionX(float const&);
 
 	float getBallPositionY();
-	void setBallPositionY(float ball_y);
+	void setBallPositionY(float const&);
 
 	float getBallVelocityX();
 	void setBallVelocityX(float xVelocity);

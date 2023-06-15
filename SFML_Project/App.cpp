@@ -13,10 +13,6 @@ void App::show(RenderWindow & window) const
 	using namespace std;
 
 	srand(time(NULL));
-
-	float ballPosX = rand() % 930;
-	float ballPosY = rand() % 570;
-
 	window.setFramerateLimit(60);
 
 	Texture textureBackGround;
@@ -26,23 +22,40 @@ void App::show(RenderWindow & window) const
 	spriteBackgrund.setTexture(textureBackGround);
 	spriteBackgrund.setPosition(0, 0);
 
-	Vector2f leftPosition(0, 225);
-	Vector2f leftSize(0, 150);
-
-	// Don't forget -  rightPosition(950, 225);
+	// Player on the left
 	
+	Vector2f leftSize(50, 150);
+	float leftPlayerPosY = ((window.getSize().y / 2.0) - (leftSize.y / 2));
+	Vector2f leftPosition(0, leftPlayerPosY);
 	Color colorleft(0, 0, 255);
-	LeftPlayer leftpl(leftPosition, colorleft);
+
+	LeftPlayer leftpl(leftSize, leftPosition, colorleft);
+
+
+	// Player on the right
+
+	Vector2f rightSize(50, 150);
+
+	float rightPlayerPosX = (window.getSize().x - rightSize.x);
+	float rightPlayerPosY = ((window.getSize().y / 2.0) - (rightSize.y / 2));
 
 	Color colorRight(0, 0, 255);
-	Vector2f rightPosition(950, 225);
-	RightPlayer rightPlayer(rightPosition, colorRight);
+	Vector2f rightPosition(rightPlayerPosX, rightPlayerPosY);
+	RightPlayer rightPlayer(rightSize, rightPosition, colorRight);
 
-	Vector2f ballPosition(ballPosX, ballPosY);
-	Vector2f ballVelocity(8, 8);
+	// Ball
+
+	Vector2f ballVelocity(8, 8);	
 	Color colorBall(0, 255, 255);
-	Ball ball1(ballPosition, ballVelocity, colorBall);
-	
+
+	Ball ball1(ballVelocity, colorBall);
+
+	float ballPosX = (window.getSize().x / 2.0);
+	float ballPosY = (window.getSize().y / 2.0);
+
+	ball1.setBallPositionX(ballPosX);
+	ball1.setBallPositionX(ballPosY);
+
 	while (window.isOpen())
 	{
 		Event event;
@@ -58,37 +71,41 @@ void App::show(RenderWindow & window) const
 
 				if (event.key.code == Keyboard::S)
 				{
-					leftpl.moveDown();
+					leftpl.moveDown(window);
 				}
 
 				if (event.key.code == Keyboard::W)
 				{
-					leftpl.moveUp();
+					leftpl.moveUp(window);
 				}
 
 				if (event.key.code == Keyboard::Up)
 				{
-					rightPlayer.moveUp();
+					rightPlayer.moveUp(window);
 				}
 
 				if (event.key.code == Keyboard::Down)
 				{
-					rightPlayer.moveDown();
+					rightPlayer.moveDown(window);
 				}
 
 				if (event.key.code == Keyboard::Q)
 				{
 					ball1.printBallLeft(ball1, leftpl);
 					//ball1.ballMoving(leftpl);
+					cout << "window.getSize().x = " << window.getSize().x << endl; // 1000
+					cout << "window.getSize().y = " << window.getSize().y << endl; // 600 
+
 				}
 			}
 		}
 
-		ball1.ballMoving(leftpl);
+		ball1.ballMoving(ball1, window);
 		ball1.Collision(ball1, leftpl, rightPlayer);
 
+
 		window.clear();
-		window.draw(spriteBackgrund);
+		//window.draw(spriteBackgrund);
 		window.draw(leftpl.getShape());
 		window.draw(rightPlayer.getShape());
 		window.draw(ball1.getShape());

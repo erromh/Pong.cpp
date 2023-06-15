@@ -16,8 +16,8 @@ private:
 	float yLeftVelocity = 20;
 
 public:
-	void moveDown();
-	void moveUp();
+	void moveDown(RenderWindow const& window);
+	void moveUp(RenderWindow const& window);
 	RectangleShape getShape();
 
 	float getPositionX();
@@ -26,7 +26,7 @@ public:
 	float getPositionY();
 	void setPositionY(float y_Pos);
 	
-	LeftPlayer(Vector2f position, Color p_color);
+	LeftPlayer(Vector2f const& size, Vector2f const& position, Color const& p_color);
 
 };
 

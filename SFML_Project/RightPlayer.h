@@ -16,10 +16,10 @@ private:
 
 public:
 
-	void moveDown();
-	void moveUp();
+	void moveDown(RenderWindow const& window);
+	void moveUp(RenderWindow const& window);
 	RectangleShape getShape();
-	RightPlayer(Vector2f start_pos, Color p_color);
+	RightPlayer(Vector2f const& size, Vector2f const& start_pos, Color const& p_color);
 
 	float getPositionX();
 	void setPositionX(float x_PosRight);

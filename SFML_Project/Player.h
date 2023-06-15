@@ -13,8 +13,8 @@ private:
 
 public:
 	
-	void virtual moveUp() = 0;
-	void virtual moveDown() = 0;
+	void virtual moveUp(RenderWindow const& window) = 0;
+	void virtual moveDown(RenderWindow const& window) = 0;
 
 	virtual RectangleShape getShape() = 0;
 };
