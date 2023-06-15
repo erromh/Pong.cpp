@@ -51,44 +51,7 @@ void Ball::ballMoving(LeftPlayer const& leftplayer)
 
 void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer const& rightplayer)
 {
-	// Left player collision
-
-
-	//if (rect1.getGlobalBounds().intersects(rect2.getGlobalBounds()))
-	//{
-	//	if (rect1.getPosition().y + rect1.getSize().y <= rect2.getPosition().y)
-	//	{
-	//		// Верхняя сторона rect1 столкнулась с нижней стороной rect2
-	//	}
-	//}
-
-	/*if (ball.m_ballShape.getGlobalBounds().intersects(leftplayer.m_Shape.getGlobalBounds()))
-	{
-		if (ball.m_ballShape.getPosition().y + ball.m_ballShape.getSize().y <= (leftplayer.m_Shape.getPosition().y))
-		{
-			m_xVelocity *= -1;
-		}
-	}*/
-	
-	bool leftCollisionX = (leftplayer.m_Shape.getGlobalBounds().left + leftplayer.m_Shape.getGlobalBounds().width
-
-		>= ball.m_ballShape.getGlobalBounds().left) &&
-
-		(ball.m_ballShape.getGlobalBounds().left + ball.m_ballShape.getGlobalBounds().width >= leftplayer.m_Shape.getGlobalBounds().left);
-
-
-	bool leftCollisionY = (leftplayer.m_Shape.getGlobalBounds().top + leftplayer.m_Shape.getGlobalBounds().height
-
-		>= ball.m_ballShape.getGlobalBounds().top) &&
-		
-		(ball.m_ballShape.getGlobalBounds().top + ball.m_ballShape.getGlobalBounds().height >= leftplayer.m_Shape.getGlobalBounds().top);
-
-
-	if (leftCollisionX && leftCollisionY)
-	{
-		m_xVelocity *= -1;
-		std::cout << "Top collision works\n";
-	}
+	// Сollision with left player
 
 	if (leftplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
 	{
@@ -96,29 +59,9 @@ void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer
 		std::cout << "Left collosion\n";
 	}
 
+	// Collision with right player
 
-	// Right collision
-
-	bool rightCollisionX = (ball.m_ballShape.getGlobalBounds().left + ball.m_ballShape.getGlobalBounds().width
-
-		>= rightplayer.m_Shape.getGlobalBounds().left);
-
-	bool rightCollisionY = (rightplayer.m_Shape.getGlobalBounds().top + rightplayer.m_Shape.getGlobalBounds().height
-
-		>= ball.m_ballShape.getGlobalBounds().top) &&
-
-		(ball.m_ballShape.getGlobalBounds().top + ball.m_ballShape.getGlobalBounds().height >= rightplayer.m_Shape.getGlobalBounds().top);
-
-	   
-	//if (rightCollisionX && rightCollisionY)
-	//{
-	//	m_xVelocity *= -1;
-	//	std::cout << "Top and bottom right collision\n";
-	//}
-
-
-	if (rightplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds())
-		&& (rightCollisionX && rightCollisionY))
+	if (rightplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
 	{
 		m_xVelocity *= -1;
 		std::cout << "Right collision getGlobalBounds()\n";

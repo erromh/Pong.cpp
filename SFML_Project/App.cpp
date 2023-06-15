@@ -14,8 +14,8 @@ void App::show(RenderWindow & window) const
 
 	srand(time(NULL));
 
-	float ballPosX = rand() % 940;
-	float ballPosY = rand() % 580;
+	float ballPosX = rand() % 930;
+	float ballPosY = rand() % 570;
 
 	window.setFramerateLimit(60);
 

@@ -15,7 +15,6 @@ private:
 	RectangleShape m_ballShape;
 	Vector2f m_position;
 
-
 	float m_xVelocity = 8;
 	float m_yVelocity = 8;
 
