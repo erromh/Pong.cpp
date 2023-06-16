@@ -1,7 +1,7 @@
 ﻿#include <SFML/Graphics.hpp>
 #include "App.h"
 
-RenderWindow window(VideoMode(1000, 600), " ", Style::None);
+RenderWindow window(VideoMode(1400, 700), " ", Style::Default);
 
 int main()
 {

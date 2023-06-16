@@ -71,12 +71,12 @@ void App::show(RenderWindow & window) const
 
 				if (event.key.code == Keyboard::S)
 				{
-					leftpl.moveDown(window);
+					leftpl.moveDownLeft(window, leftpl);
 				}
 
 				if (event.key.code == Keyboard::W)
 				{
-					leftpl.moveUp(window);
+					leftpl.moveUpLeft(window, leftpl);
 				}
 
 				if (event.key.code == Keyboard::Up)
@@ -93,8 +93,8 @@ void App::show(RenderWindow & window) const
 				{
 					ball1.printBallLeft(ball1, leftpl);
 					//ball1.ballMoving(leftpl);
-					cout << "window.getSize().x = " << window.getSize().x << endl; // 1000
-					cout << "window.getSize().y = " << window.getSize().y << endl; // 600 
+					cout << "window.getSize().x = " << window.getSize().x << endl; // 
+					cout << "window.getSize().y = " << window.getSize().y << endl; //  
 
 				}
 			}
@@ -103,14 +103,11 @@ void App::show(RenderWindow & window) const
 		ball1.ballMoving(ball1, window);
 		ball1.Collision(ball1, leftpl, rightPlayer);
 
-
 		window.clear();
 		//window.draw(spriteBackgrund);
-		window.draw(leftpl.getShape());
+		window.draw(leftpl.getShapeLeft());
 		window.draw(rightPlayer.getShape());
 		window.draw(ball1.getShape());
 		window.display();
-
-	}
-	
+	}	
 }

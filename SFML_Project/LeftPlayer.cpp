@@ -7,14 +7,14 @@ using namespace std;
 
 LeftPlayer::LeftPlayer(Vector2f const& size, Vector2f const& position, Color const& p_color)
 {
-	m_Color = p_color;
-	m_Shape.setFillColor(m_Color);
-	m_Shape.setSize(size);
+	m_ColorLeft = p_color;
+	m_ShapeLeft.setFillColor(m_ColorLeft);
+	m_ShapeLeft.setSize(size);
 	
 	setPositionY(position.y);
 	setPositionX(position.x);
 	
-	m_Shape.setPosition(getPositionX(), getPositionY());
+	m_ShapeLeft.setPosition(getPositionX(), getPositionY());
 
 #ifdef DEBUG
 	cout << "start position y - " << m_Leftposition.y << endl;
@@ -22,32 +22,33 @@ LeftPlayer::LeftPlayer(Vector2f const& size, Vector2f const& position, Color con
 
 }
 
-void LeftPlayer::moveDown(RenderWindow const& window)
+void LeftPlayer::moveDownLeft(RenderWindow const& window, LeftPlayer const& leftplayer)
 {
 	m_Leftposition.y += yLeftVelocity;
 
-	//if (m_Leftposition.y >= ((window.getSize().y - m_Shape.getGlobalBounds().height) + yLeftVelocity))
-	//{
-	//	m_Shape.setPosition(m_Leftposition);
-	//	moveUp();
-	//}
-	m_Shape.setPosition(m_Leftposition);
+	if ((leftplayer.m_Leftposition.y + leftplayer.m_ShapeLeft.getGlobalBounds().height) >= window.getSize().y)
+	{
+		std::cout << "LEFT COLLISION WORKS\n";
+		yLeftVelocity = 0;
+	}
+	m_ShapeLeft.setPosition(m_Leftposition);
+
 
 #ifdef DEBUG
 	cout << "left Y moveDown() = " << m_Leftposition.y << endl;
 #endif 
 }
 
-void LeftPlayer::moveUp(RenderWindow const& window)
+void LeftPlayer::moveUpLeft(RenderWindow const& window, LeftPlayer const& leftplayer)
 {
 	m_Leftposition.y -= yLeftVelocity;
 	
 	if (m_Leftposition.y <= -yLeftVelocity)
 	{
-		m_Shape.setPosition(m_Leftposition);
+		m_ShapeLeft.setPosition(m_Leftposition);
 		//moveDown();
 	}
-	m_Shape.setPosition(m_Leftposition);
+	m_ShapeLeft.setPosition(m_Leftposition);
 
 #ifdef DEBUG
 	cout << "left Y moveUp() = " << m_Leftposition.y << endl;
@@ -82,8 +83,8 @@ void LeftPlayer::setPositionY(float y_Pos)
 
 // set and get size
 
-RectangleShape LeftPlayer::getShape()
+RectangleShape LeftPlayer::getShapeLeft()
 {
-	return m_Shape;
+	return m_ShapeLeft;
 }
 

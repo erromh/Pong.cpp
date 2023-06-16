@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Player.h"
+using namespace sf;
 
-class RightPlayer : public Player
+class RightPlayer
 {
 	friend class Ball;
 	friend class App;

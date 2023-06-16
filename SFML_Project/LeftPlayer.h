@@ -1,9 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Player.h"
 #include "Ball.h"
+using namespace sf;
 
-class LeftPlayer : public Player
+class LeftPlayer
 {
 	friend class Ball;
 	friend class App;
@@ -11,14 +11,14 @@ class LeftPlayer : public Player
 private:
 
 	Vector2f m_Leftposition;
-	RectangleShape m_Shape;
-	Color m_Color;
+	RectangleShape m_ShapeLeft;
+	Color m_ColorLeft;
 	float yLeftVelocity = 20;
 
 public:
-	void moveDown(RenderWindow const& window);
-	void moveUp(RenderWindow const& window);
-	RectangleShape getShape();
+	void moveDownLeft(RenderWindow const& window, LeftPlayer const& leftplayer);
+	void moveUpLeft(RenderWindow const& window, LeftPlayer const& leftplayer);
+	RectangleShape getShapeLeft();
 
 	float getPositionX();
 	void setPositionX(float x_Pos);

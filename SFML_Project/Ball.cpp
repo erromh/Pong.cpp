@@ -49,7 +49,7 @@ void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer
 {
 	// Ñollision with left player
 
-	if (leftplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
+	if (leftplayer.m_ShapeLeft.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
 	{
 		m_xVelocity *= -1;
 		std::cout << "Left collosion\n";
@@ -87,12 +87,14 @@ bool Ball::gameOver()
 
 void Ball::printBallLeft(Ball const& ball, LeftPlayer const& leftplayer)
 {
-	std::cout << "\nPlayer width = " << leftplayer.m_Shape.getGlobalBounds().width << std::endl;
+	std::cout << "\nPlayer width = " << leftplayer.m_ShapeLeft.getGlobalBounds().width << std::endl;
 	std::cout << "Ball.width = " << ball.m_ballShape.getGlobalBounds().width << std::endl;
 	std::cout << "Ball.Left + width = " << ball.m_ballShape.getGlobalBounds().left + 
 		ball.m_ballShape.getGlobalBounds().width << std::endl;
-	std::cout << "LeftPlayer.left = " << leftplayer.m_Shape.getGlobalBounds().left << std::endl;
+	std::cout << "LeftPlayer.left = " << leftplayer.m_ShapeLeft.getGlobalBounds().left << std::endl;
 	std::cout << "Ball::getBallPositionX() = " << Ball::getBallPositionX() << std::endl;
+	std::cout << "leftplayer top = " << leftplayer.m_ShapeLeft.getGlobalBounds().top << std::endl;
+	std::cout << "Left Y = " << leftplayer.m_Leftposition.y << std::endl;
 }
 
 // Get and set ball's X position 
