@@ -28,8 +28,12 @@ void LeftPlayer::moveDownLeft(RenderWindow const& window, LeftPlayer const& left
 
 	if ((leftplayer.m_Leftposition.y + leftplayer.m_ShapeLeft.getGlobalBounds().height) >= window.getSize().y)
 	{
-		std::cout << "LEFT COLLISION WORKS\n";
-		yLeftVelocity = 0;
+		std::cout << "DOWN LEFT COLLISION doesn't WORKS\n";
+	//	yLeftVelocity = 0;
+	}
+	else
+	{
+		yLeftVelocity = 20;
 	}
 	m_ShapeLeft.setPosition(m_Leftposition);
 

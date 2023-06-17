@@ -27,7 +27,7 @@ void App::show(RenderWindow & window) const
 	Vector2f leftSize(50, 150);
 	float leftPlayerPosY = ((window.getSize().y / 2.0) - (leftSize.y / 2));
 	Vector2f leftPosition(0, leftPlayerPosY);
-	Color colorleft(0, 0, 255);
+	Color colorleft(255, 255, 255);
 
 	LeftPlayer leftpl(leftSize, leftPosition, colorleft);
 
@@ -39,7 +39,7 @@ void App::show(RenderWindow & window) const
 	float rightPlayerPosX = (window.getSize().x - rightSize.x);
 	float rightPlayerPosY = ((window.getSize().y / 2.0) - (rightSize.y / 2));
 
-	Color colorRight(0, 0, 255);
+	Color colorRight(45, 0, 255);
 	Vector2f rightPosition(rightPlayerPosX, rightPlayerPosY);
 	RightPlayer rightPlayer(rightSize, rightPosition, colorRight);
 

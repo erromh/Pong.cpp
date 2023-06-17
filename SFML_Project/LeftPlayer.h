@@ -28,6 +28,7 @@ public:
 	
 	LeftPlayer(Vector2f const& size, Vector2f const& position, Color const& p_color);
 
+	bool stopLeft(bool&);
 };
 
 
