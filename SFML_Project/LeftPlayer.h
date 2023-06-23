@@ -14,6 +14,7 @@ private:
 	RectangleShape m_ShapeLeft;
 	Color m_ColorLeft;
 	float yLeftVelocity = 20;
+	bool stateDownLeft = true;
 
 public:
 	void moveDownLeft(RenderWindow const& window, LeftPlayer const& leftplayer);
@@ -28,7 +29,7 @@ public:
 	
 	LeftPlayer(Vector2f const& size, Vector2f const& position, Color const& p_color);
 
-	bool stopLeft(bool&);
+	static bool changeState(bool&);
 };
 
 

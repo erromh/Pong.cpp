@@ -24,17 +24,16 @@ void App::show(RenderWindow & window) const
 
 	// Player on the left
 	
-	Vector2f leftSize(50, 150);
+	Vector2f leftSize(25, 150);
 	float leftPlayerPosY = ((window.getSize().y / 2.0) - (leftSize.y / 2));
 	Vector2f leftPosition(0, leftPlayerPosY);
 	Color colorleft(255, 255, 255);
-
 	LeftPlayer leftpl(leftSize, leftPosition, colorleft);
 
 
 	// Player on the right
 
-	Vector2f rightSize(50, 150);
+	Vector2f rightSize(25, 150);
 
 	float rightPlayerPosX = (window.getSize().x - rightSize.x);
 	float rightPlayerPosY = ((window.getSize().y / 2.0) - (rightSize.y / 2));
@@ -94,8 +93,7 @@ void App::show(RenderWindow & window) const
 					ball1.printBallLeft(ball1, leftpl);
 					//ball1.ballMoving(leftpl);
 					cout << "window.getSize().x = " << window.getSize().x << endl; // 
-					cout << "window.getSize().y = " << window.getSize().y << endl; //  
-
+					cout << "window.getSize().y = " << window.getSize().y << endl; //
 				}
 			}
 		}

@@ -22,42 +22,48 @@ LeftPlayer::LeftPlayer(Vector2f const& size, Vector2f const& position, Color con
 
 }
 
+bool LeftPlayer::changeState(bool& checkCollision)
+{
+	if (checkCollision == false)
+	{
+		checkCollision = true;
+	}
+
+	if (checkCollision == true)
+	{
+		checkCollision = false;
+	}
+
+	return checkCollision;
+}
+
 void LeftPlayer::moveDownLeft(RenderWindow const& window, LeftPlayer const& leftplayer)
 {
 	m_Leftposition.y += yLeftVelocity;
 
-	if ((leftplayer.m_Leftposition.y + leftplayer.m_ShapeLeft.getGlobalBounds().height) >= window.getSize().y)
+	if ((leftplayer.m_Leftposition.y + leftplayer.m_ShapeLeft.getGlobalBounds().height) == window.getSize().y)
 	{
-		std::cout << "DOWN LEFT COLLISION doesn't WORKS\n";
-	//	yLeftVelocity = 0;
+		// you should make fucking collision with window
 	}
-	else
-	{
-		yLeftVelocity = 20;
-	}
+	
 	m_ShapeLeft.setPosition(m_Leftposition);
-
-
-#ifdef DEBUG
-	cout << "left Y moveDown() = " << m_Leftposition.y << endl;
-#endif 
 }
 
 void LeftPlayer::moveUpLeft(RenderWindow const& window, LeftPlayer const& leftplayer)
 {
 	m_Leftposition.y -= yLeftVelocity;
 	
+	if ((leftplayer.m_Leftposition.y + leftplayer.m_ShapeLeft.getGlobalBounds().height) >= window.getSize().y)
+	{
+		changeState(stateDownLeft);
+	}
+
 	if (m_Leftposition.y <= -yLeftVelocity)
 	{
 		m_ShapeLeft.setPosition(m_Leftposition);
-		//moveDown();
 	}
+	
 	m_ShapeLeft.setPosition(m_Leftposition);
-
-#ifdef DEBUG
-	cout << "left Y moveUp() = " << m_Leftposition.y << endl;
-#endif // DEBUG
-
 }
 
 // set and get X position
@@ -82,7 +88,6 @@ float LeftPlayer::getPositionY()
 void LeftPlayer::setPositionY(float y_Pos)
 {
 	m_Leftposition.y = y_Pos;
-	cout << "setPosition y = " << m_Leftposition.y << endl;
 }
 
 // set and get size
