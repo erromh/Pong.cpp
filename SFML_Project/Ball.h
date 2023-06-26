@@ -1,13 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <memory>
-#include "LeftPlayer.h"
-#include "RightPlayer.h"
+#include "Players.h"
 using namespace sf;
 
 class Ball
 {
-	friend class LeftPlayer;
+	friend class Players;
 	friend class RightPlayer;
 	friend class App;
 
@@ -26,7 +25,7 @@ public:
 
 	void ballMoving(Ball const& ball, RenderWindow const & window);
 
-	void Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer const& rightplayer);
+	void Collision(Ball const& ball, Players const& players, Players const& rightplayer);
 
 	float getBallPositionX();
 	void setBallPositionX(float const&);
@@ -40,7 +39,7 @@ public:
 	float getBallVelocityY();
 	void setBallVelocityY(float yVelocity);
 
-	void printBallLeft(Ball const& ball, LeftPlayer const& leftplayer);
+	void printBallLeft(Ball const& ball, Players const& players, Players const& rightplayer);
 
 	bool gameOver();
 };

@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include <memory>
 #include "Ball.h"
-#include "LeftPlayer.h"
-#include "RightPlayer.h"
+#include "Players.h"
 
 Ball::Ball(Vector2f velocity, Color ballColor)
 {
@@ -45,11 +44,11 @@ void Ball::ballMoving(Ball const& ball, RenderWindow const & window)
 
 // Checking collisions
 
-void Ball::Collision(Ball const& ball, LeftPlayer const& leftplayer, RightPlayer const& rightplayer)
+void Ball::Collision(Ball const& ball, Players const& players, Players const& rightplayer)
 {
 	// Ñollision with left player
 
-	if (leftplayer.m_ShapeLeft.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
+	if (players.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
 	{
 		m_xVelocity *= -1;
 		std::cout << "Left collosion\n";
@@ -76,7 +75,7 @@ bool Ball::gameOver()
 	setBallVelocityX(0);
 	setBallVelocityY(0);
 
-	//void LeftPlayer::getPositionX()
+	//void Players::getPositionX()
 
 	m_ballShape.setFillColor(Color::Transparent);
 
@@ -85,16 +84,16 @@ bool Ball::gameOver()
 	return true;
 }
 
-void Ball::printBallLeft(Ball const& ball, LeftPlayer const& leftplayer)
+void Ball::printBallLeft(Ball const& ball, Players const& players, Players const& rightplayer)
 {
-	std::cout << "\nPlayer width = " << leftplayer.m_ShapeLeft.getGlobalBounds().width << std::endl;
+	std::cout << "\nPlayer width = " << players.m_Shape.getGlobalBounds().width << std::endl;
 	std::cout << "Ball.width = " << ball.m_ballShape.getGlobalBounds().width << std::endl;
 	std::cout << "Ball.Left + width = " << ball.m_ballShape.getGlobalBounds().left + 
 		ball.m_ballShape.getGlobalBounds().width << std::endl;
-	std::cout << "LeftPlayer.left = " << leftplayer.m_ShapeLeft.getGlobalBounds().left << std::endl;
+	std::cout << "Players.left = " << players.m_Shape.getGlobalBounds().left << std::endl;
 	std::cout << "Ball::getBallPositionX() = " << Ball::getBallPositionX() << std::endl;
-	std::cout << "leftplayer top = " << leftplayer.m_ShapeLeft.getGlobalBounds().top << std::endl;
-	std::cout << "Left Y = " << leftplayer.m_Leftposition.y << std::endl;
+	std::cout << "Players top = " << players.m_Shape.getGlobalBounds().top << std::endl;
+	std::cout << "Left Y = " << players.m_Position.y << std::endl;
 }
 
 // Get and set ball's X position 

@@ -149,16 +149,14 @@
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="GameMenu.cpp" />
-    <ClCompile Include="LeftPlayer.cpp" />
+    <ClCompile Include="Players.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="RightPlayer.cpp" />
     <ClCompile Include="App.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
     <ClInclude Include="GameMenu.h" />
-    <ClInclude Include="LeftPlayer.h" />
-    <ClInclude Include="RightPlayer.h" />
+    <ClInclude Include="Players.h" />
     <ClInclude Include="App.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
