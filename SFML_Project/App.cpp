@@ -29,7 +29,7 @@ void App::show(RenderWindow & window) const
 	float PlayersPosY = ((window.getSize().y / 2.0) - (leftSize.y / 2));
 	
 	// Velocity
-	float leftVelocity = 20;
+	float Velocity = 20;
 
 	// Position setting
 	Vector2f leftPosition(0, PlayersPosY);
@@ -41,7 +41,7 @@ void App::show(RenderWindow & window) const
 	Players leftPlayer(leftSize, leftPosition, colorleft);
 	
 	// Set velocity
-	leftPlayer.setVelocity(leftVelocity);
+	leftPlayer.setVelocity(Velocity);
 
 
 	// Player on the right
@@ -49,11 +49,13 @@ void App::show(RenderWindow & window) const
 	Vector2f rightSize(25, 150);
 
 	float rightPlayerPosX = (window.getSize().x - rightSize.x);
-	float rightPlayerPosY = ((window.getSize().y / 2.0) - (rightSize.y / 2));
+	float rightPlayerPosY = static_cast<float>((window.getSize().y / 2.0) - (rightSize.y / 2));
 
 	Color colorRight(45, 0, 255);
 	Vector2f rightPosition(rightPlayerPosX, rightPlayerPosY);
 	Players rightPlayer(rightSize, rightPosition, colorRight);
+
+	rightPlayer.setVelocity(Velocity);
 
 	// Ball
 
@@ -83,7 +85,7 @@ void App::show(RenderWindow & window) const
 					window.close();
 				}
 
-				if (event.key.code == Keyboard::S)
+				if (Keyboard::isKeyPressed(Keyboard::S))
 				{
 					leftPlayer.moveDown(window, leftPlayer);
 					
@@ -93,43 +95,44 @@ void App::show(RenderWindow & window) const
 					}
 				}
 				
-				if (event.key.code == Keyboard::W)
+				if (Keyboard::isKeyPressed(Keyboard::W))
 				{
 					leftPlayer.moveUp(window, leftPlayer);
 
 					if (leftPlayer.m_Shape.getGlobalBounds().top < 0)
 					{
 						leftPlayer.moveDown(window, leftPlayer);
-					}
+					} 
 				}
 
-				if (event.key.code == Keyboard::Up)
+				if (Keyboard::isKeyPressed(Keyboard::Up))
 				{
 					rightPlayer.moveUp(window, rightPlayer);
 					
-					if (rightPlayer.m_Shape.getGlobalBounds().top < rightPlayer.getShape().getGlobalBounds().left)
+					if (rightPlayer.m_Shape.getGlobalBounds().top <= 0)
 					{
 						rightPlayer.moveDown(window, rightPlayer);
 					}
 				}
 
-				if (event.key.code == Keyboard::Down)
+				if (Keyboard::isKeyPressed(Keyboard::Down))
 				{
 					rightPlayer.moveDown(window, rightPlayer);
 					
 					if (rightPlayer.m_Shape.getGlobalBounds().top + rightPlayer.m_Shape.getGlobalBounds().height > window.getSize().y)
 					{
-						rightPlayer.moveDown(window, rightPlayer);
+						rightPlayer.moveUp(window, rightPlayer);
 					}
 				}
 
 				if (event.key.code == Keyboard::Q)
 				{
-					ball1.printBallLeft(ball1, leftPlayer, rightPlayer);
-					//ball1.ballMoving(leftPlayer);
-					cout << "window.getSize().x = " << window.getSize().x << endl; // 
-					cout << "window.getSize().y = " << window.getSize().y << endl; //
-					cout << "rightplayer = " << rightPlayer.getShape().getGlobalBounds().left << endl;
+					cout << "window.getSize().x = " << window.getSize().x << endl;  
+					cout << "window.getSize().y = " << window.getSize().y << endl;
+					cout << "rightplayer Y = " << rightPlayer.getPositionY() << endl;
+					cout << "LeftPlayer Y = " << leftPlayer.getPositionY() << endl;
+					cout << "rightplayer X = " << rightPlayer.getPositionX() << endl << endl;
+
 				}
 			}
 		}

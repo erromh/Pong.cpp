@@ -84,17 +84,6 @@ bool Ball::gameOver()
 	return true;
 }
 
-void Ball::printBallLeft(Ball const& ball, Players const& players, Players const& rightplayer)
-{
-	std::cout << "\nPlayer width = " << players.m_Shape.getGlobalBounds().width << std::endl;
-	std::cout << "Ball.width = " << ball.m_ballShape.getGlobalBounds().width << std::endl;
-	std::cout << "Ball.Left + width = " << ball.m_ballShape.getGlobalBounds().left + 
-		ball.m_ballShape.getGlobalBounds().width << std::endl;
-	std::cout << "Players.left = " << players.m_Shape.getGlobalBounds().left << std::endl;
-	std::cout << "Ball::getBallPositionX() = " << Ball::getBallPositionX() << std::endl;
-	std::cout << "Players top = " << players.m_Shape.getGlobalBounds().top << std::endl;
-	std::cout << "Left Y = " << players.m_Position.y << std::endl;
-}
 
 // Get and set ball's X position 
 
