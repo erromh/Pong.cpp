@@ -12,7 +12,7 @@ private:
 
 	Vector2f m_Position;
 	RectangleShape m_Shape;
-	Color m_ColorLeft;
+	Color m_playersColor;
 	float yVelocity;
 	bool stateMoveLeft = true;
 

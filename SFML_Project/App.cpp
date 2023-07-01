@@ -3,10 +3,11 @@
 #include <ctime>
 #include "App.h"
 #include "Players.h"
+#include "GameMenu.h"
 
 using namespace sf;
 
-void App::show(RenderWindow & window) const
+void App::pvp_game(RenderWindow & window) const
 {
 	using namespace std;
 
@@ -35,10 +36,10 @@ void App::show(RenderWindow & window) const
 	Vector2f leftPosition(0, PlayersPosY);
 	
 	// Player color
-	Color colorleft(255, 255, 255);
+	Color playersColor(135, 206, 235);
 
 	// Create player
-	Players leftPlayer(leftSize, leftPosition, colorleft);
+	Players leftPlayer(leftSize, leftPosition, playersColor);
 	
 	// Set velocity
 	leftPlayer.setVelocity(Velocity);
@@ -48,19 +49,18 @@ void App::show(RenderWindow & window) const
 
 	Vector2f rightSize(25, 150);
 
-	float rightPlayerPosX = (window.getSize().x - rightSize.x);
+	float rightPlayerPosX = static_cast<float>(window.getSize().x - rightSize.x);
 	float rightPlayerPosY = static_cast<float>((window.getSize().y / 2.0) - (rightSize.y / 2));
 
-	Color colorRight(45, 0, 255);
 	Vector2f rightPosition(rightPlayerPosX, rightPlayerPosY);
-	Players rightPlayer(rightSize, rightPosition, colorRight);
+	Players rightPlayer(rightSize, rightPosition, playersColor);
 
 	rightPlayer.setVelocity(Velocity);
 
 	// Ball
 
 	Vector2f ballVelocity(8, 8);	
-	Color colorBall(0, 255, 255);
+	Color colorBall(96, 18, 223);
 
 	Ball ball1(ballVelocity, colorBall);
 
@@ -69,8 +69,6 @@ void App::show(RenderWindow & window) const
 
 	ball1.setBallPositionX(ballPosX);
 	ball1.setBallPositionX(ballPosY);
-
-	// Delete fucking Playersclass
 
 	while (window.isOpen())
 	{
@@ -132,7 +130,6 @@ void App::show(RenderWindow & window) const
 					cout << "rightplayer Y = " << rightPlayer.getPositionY() << endl;
 					cout << "LeftPlayer Y = " << leftPlayer.getPositionY() << endl;
 					cout << "rightplayer X = " << rightPlayer.getPositionX() << endl << endl;
-
 				}
 			}
 		}
@@ -146,4 +143,16 @@ void App::show(RenderWindow & window) const
 		window.draw(ball1.getShape());
 		window.display();
 	}	
+}
+
+
+void App::show_menu(RenderWindow& window)
+{
+	RectangleShape menu;
+	menu.setFillColor(Color::Yellow);
+	menu.setSize(Vector2f(300, 400));
+
+	std::cout << "menu works\n";
+
+	window.draw(menu);
 }

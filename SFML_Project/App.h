@@ -9,7 +9,8 @@ class App
 	friend class Ball;
 
 public:
-	void show(RenderWindow & window) const;
-
+	void pvp_game(RenderWindow & window) const;
+	void show_menu(RenderWindow& window);
+	void online_game();
 };
 

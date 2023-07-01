@@ -8,8 +8,8 @@ using namespace std;
 
 Players::Players(Vector2f const& size, Vector2f const& position, Color const& p_color)
 {
-	m_ColorLeft = p_color;
-	m_Shape.setFillColor(m_ColorLeft);
+	m_playersColor = p_color;
+	m_Shape.setFillColor(m_playersColor);
 	m_Shape.setSize(size);
 	
 	setPositionY(position.y);
