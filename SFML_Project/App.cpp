@@ -21,7 +21,7 @@ void App::pvp_game(RenderWindow & window) const
 	spriteBackgrund.setTexture(textureBackGround);
 	spriteBackgrund.setPosition(0, 0);
 
-	// Player on the left
+	/* Player on the left */
 	
 	// Player size
 	Vector2f leftSize(25, 150);
@@ -45,7 +45,7 @@ void App::pvp_game(RenderWindow & window) const
 	leftPlayer.setVelocity(Velocity);
 
 
-	// Player on the right
+	/* Player on the right */
 
 	Vector2f rightSize(25, 150);
 
@@ -57,7 +57,8 @@ void App::pvp_game(RenderWindow & window) const
 
 	rightPlayer.setVelocity(Velocity);
 
-	// Ball
+
+	/* Ball */
 
 	Vector2f ballVelocity(8, 8);	
 	Color colorBall(96, 18, 223);
@@ -69,6 +70,23 @@ void App::pvp_game(RenderWindow & window) const
 
 	ball1.setBallPositionX(ballPosX);
 	ball1.setBallPositionX(ballPosY);
+
+	/* Menu */ 
+
+	// Background
+	Color menu_background_color(0, 255, 127);
+	Vector2f menu_background_size(window.getSize().x, window.getSize().y);
+	Vector2f menu_position(0, 0);
+	GameMenu menu_background(window, menu_background_size, menu_background_color, menu_position);
+
+	// Menu items
+
+	Color menu_item1_color(255, 192, 203);
+	Vector2f menu_item1_size(400, 90);
+	Vector2f menu_item1_pos((window.getSize().x / 2) - (menu_item1_size.x / 2), ((window.getSize().y / 2) - (menu_item1_size.y / 2)));
+	GameMenu menu_item1(menu_item1_size, menu_item1_color, menu_item1_pos);
+
+	// Game window
 
 	while (window.isOpen())
 	{
@@ -85,74 +103,65 @@ void App::pvp_game(RenderWindow & window) const
 
 				if (Keyboard::isKeyPressed(Keyboard::S))
 				{
-					leftPlayer.moveDown(window, leftPlayer);
+					leftPlayer.moveDown(leftPlayer);
 					
 					if (leftPlayer.m_Shape.getGlobalBounds().top + leftPlayer.m_Shape.getGlobalBounds().height > window.getSize().y)
 					{
-						leftPlayer.moveUp(window, leftPlayer);
+						leftPlayer.moveUp(leftPlayer);
 					}
 				}
 				
 				if (Keyboard::isKeyPressed(Keyboard::W))
 				{
-					leftPlayer.moveUp(window, leftPlayer);
+					leftPlayer.moveUp(leftPlayer);
 
 					if (leftPlayer.m_Shape.getGlobalBounds().top < 0)
 					{
-						leftPlayer.moveDown(window, leftPlayer);
+						leftPlayer.moveDown(leftPlayer);
 					} 
 				}
 
 				if (Keyboard::isKeyPressed(Keyboard::Up))
 				{
-					rightPlayer.moveUp(window, rightPlayer);
+					rightPlayer.moveUp( rightPlayer);
 					
 					if (rightPlayer.m_Shape.getGlobalBounds().top <= 0)
 					{
-						rightPlayer.moveDown(window, rightPlayer);
+						rightPlayer.moveDown(rightPlayer);
 					}
 				}
 
 				if (Keyboard::isKeyPressed(Keyboard::Down))
 				{
-					rightPlayer.moveDown(window, rightPlayer);
+					rightPlayer.moveDown(rightPlayer);
 					
 					if (rightPlayer.m_Shape.getGlobalBounds().top + rightPlayer.m_Shape.getGlobalBounds().height > window.getSize().y)
 					{
-						rightPlayer.moveUp(window, rightPlayer);
+						rightPlayer.moveUp(rightPlayer);
 					}
-				}
-
-				if (event.key.code == Keyboard::Q)
-				{
-					cout << "window.getSize().x = " << window.getSize().x << endl;  
-					cout << "window.getSize().y = " << window.getSize().y << endl;
-					cout << "rightplayer Y = " << rightPlayer.getPositionY() << endl;
-					cout << "LeftPlayer Y = " << leftPlayer.getPositionY() << endl;
-					cout << "rightplayer X = " << rightPlayer.getPositionX() << endl << endl;
-				}
+				}				
 			}
 		}
 
 		ball1.ballMoving(ball1, window);
 		ball1.Collision(ball1, leftPlayer, rightPlayer);
 
+
 		window.clear();
+
+		// Players display
 		window.draw(leftPlayer.getShape());
 		window.draw(rightPlayer.getShape());
+		
+		// Ball display
 		window.draw(ball1.getShape());
+
+		// Menu display
+
+		window.draw(menu_background.get_menu_shape());
+		window.draw(menu_item1.get_menu_shape());
+
+
 		window.display();
 	}	
-}
-
-
-void App::show_menu(RenderWindow& window)
-{
-	RectangleShape menu;
-	menu.setFillColor(Color::Yellow);
-	menu.setSize(Vector2f(300, 400));
-
-	std::cout << "menu works\n";
-
-	window.draw(menu);
 }

@@ -14,11 +14,10 @@ private:
 	RectangleShape m_Shape;
 	Color m_playersColor;
 	float yVelocity;
-	bool stateMoveLeft = true;
 
 public:
-	void moveDown(RenderWindow const& window, Players const& players);
-	void moveUp(RenderWindow const& window, Players const& players);
+	void moveDown(Players const& players);
+	void moveUp(Players const& players);
 	RectangleShape getShape();
 
 	float getPositionX();

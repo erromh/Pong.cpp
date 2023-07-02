@@ -22,14 +22,14 @@ Players::Players(Vector2f const& size, Vector2f const& position, Color const& p_
 #endif
 }
 
-void Players::moveDown(RenderWindow const& window, Players const& players)
+void Players::moveDown(Players const& players)
 {
  	m_Position.y += yVelocity;
 	
 	m_Shape.setPosition(m_Position);
 }
 
-void Players::moveUp(RenderWindow const& window, Players const& players)
+void Players::moveUp(Players const& players)
 {
 	m_Position.y -= yVelocity;
 
