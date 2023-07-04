@@ -3,25 +3,27 @@
 #include "App.h"
 using namespace sf;
 
+#define max_menu_items 4
+
 class GameMenu
 {
 private:
 
-	int menu_window_height;
-	int menu_window_width;
-
-	RectangleShape menu_shape;	
+	int gameMenuSelected;
+	Font font;
+	Text mainMenu[max_menu_items];
 
 public:
 
-	GameMenu(RenderWindow const& window, Vector2f const& menuSize, Color const& menuColor, Vector2f const& menuPosition);
-	GameMenu(Vector2f const& menuSize, Color const& menuColor, Vector2f const& menuPosition);
+	GameMenu(float width, float height, RenderWindow const& menuWindow);
 
-	void show_menu(RenderWindow const& window);
+	void showMenu(RenderWindow& menuWindow);
+	void menuMoveUp();
+	void menuMoveDown();
 
-	//void setSizeX(Vector2f const& )
+	int menuPress();
 
-	RectangleShape get_menu_shape();
+	~GameMenu();
 };
 
 

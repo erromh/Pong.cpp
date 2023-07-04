@@ -10,7 +10,7 @@ class App
 
 public:
 	void pvp_game(RenderWindow & window) const;
-	//void show_menu(RenderWindow& window);
+	void show_menu(RenderWindow& window);
 	void online_game();
 };
 

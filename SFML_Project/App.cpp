@@ -6,20 +6,70 @@
 #include "GameMenu.h"
 
 using namespace sf;
+using namespace std;
 
-void App::pvp_game(RenderWindow & window) const
+
+void App::show_menu(RenderWindow& window)
 {
-	using namespace std;
+	App pvpGame;
 
+
+	float menuHeight = window.getSize().x;
+	float menuWidth = window.getSize().y;
+
+	RenderWindow MENU(VideoMode(menuHeight, menuWidth), "Menu", Style::Default);
+	GameMenu menu(MENU.getSize().x, MENU.getSize().y, MENU);
+
+	while (MENU.isOpen())
+	{
+		Event menuEvent;
+
+		while (MENU.pollEvent(menuEvent))
+		{
+			if (menuEvent.type == menuEvent.Closed())
+			{
+				MENU.close();
+			}
+
+			if (menuEvent.type == Event::KeyReleased)
+			{
+				if (menuEvent.key.code == Keyboard::Up)
+				{
+					menu.menuMoveUp();
+					cout << "menu.menuPress() = " << menu.menuPress() << endl;
+					break;
+				}
+
+				if (menuEvent.key.code == Keyboard::Down)
+				{
+					menu.menuMoveDown();
+					cout << "menu.menuPress() = " << menu.menuPress() << endl;
+					break;
+				}
+
+				if (menuEvent.key.code == Keyboard::Enter)
+				{
+					int choise = menu.menuPress();
+
+					if (choise == 0)
+					{
+						pvpGame.pvp_game(window);
+					}
+
+				}
+			}
+		}
+
+		MENU.clear();
+		menu.showMenu(MENU);
+		MENU.display();
+	}
+}
+
+void App::pvp_game(RenderWindow& window) const
+{
 	srand(time(NULL));
 	window.setFramerateLimit(60);
-
-	Texture textureBackGround;
-	textureBackGround.loadFromFile("D:/c++++/SFML_Project/Background.png");
-
-	Sprite spriteBackgrund;
-	spriteBackgrund.setTexture(textureBackGround);
-	spriteBackgrund.setPosition(0, 0);
 
 	/* Player on the left */
 	
@@ -49,8 +99,8 @@ void App::pvp_game(RenderWindow & window) const
 
 	Vector2f rightSize(25, 150);
 
-	float rightPlayerPosX = static_cast<float>(window.getSize().x - rightSize.x);
-	float rightPlayerPosY = static_cast<float>((window.getSize().y / 2.0) - (rightSize.y / 2));
+	float rightPlayerPosX = (window.getSize().x - rightSize.x);
+	float rightPlayerPosY = ((window.getSize().y / 2.0) - (rightSize.y / 2));
 
 	Vector2f rightPosition(rightPlayerPosX, rightPlayerPosY);
 	Players rightPlayer(rightSize, rightPosition, playersColor);
@@ -73,18 +123,8 @@ void App::pvp_game(RenderWindow & window) const
 
 	/* Menu */ 
 
-	// Background
-	Color menu_background_color(0, 255, 127);
-	Vector2f menu_background_size(window.getSize().x, window.getSize().y);
-	Vector2f menu_position(0, 0);
-	GameMenu menu_background(window, menu_background_size, menu_background_color, menu_position);
+	
 
-	// Menu items
-
-	Color menu_item1_color(255, 192, 203);
-	Vector2f menu_item1_size(400, 90);
-	Vector2f menu_item1_pos((window.getSize().x / 2) - (menu_item1_size.x / 2), ((window.getSize().y / 2) - (menu_item1_size.y / 2)));
-	GameMenu menu_item1(menu_item1_size, menu_item1_color, menu_item1_pos);
 
 	// Game window
 
@@ -104,13 +144,13 @@ void App::pvp_game(RenderWindow & window) const
 				if (Keyboard::isKeyPressed(Keyboard::S))
 				{
 					leftPlayer.moveDown(leftPlayer);
-					
+
 					if (leftPlayer.m_Shape.getGlobalBounds().top + leftPlayer.m_Shape.getGlobalBounds().height > window.getSize().y)
 					{
 						leftPlayer.moveUp(leftPlayer);
 					}
 				}
-				
+
 				if (Keyboard::isKeyPressed(Keyboard::W))
 				{
 					leftPlayer.moveUp(leftPlayer);
@@ -118,13 +158,13 @@ void App::pvp_game(RenderWindow & window) const
 					if (leftPlayer.m_Shape.getGlobalBounds().top < 0)
 					{
 						leftPlayer.moveDown(leftPlayer);
-					} 
+					}
 				}
 
 				if (Keyboard::isKeyPressed(Keyboard::Up))
 				{
-					rightPlayer.moveUp( rightPlayer);
-					
+					rightPlayer.moveUp(rightPlayer);
+
 					if (rightPlayer.m_Shape.getGlobalBounds().top <= 0)
 					{
 						rightPlayer.moveDown(rightPlayer);
@@ -134,18 +174,17 @@ void App::pvp_game(RenderWindow & window) const
 				if (Keyboard::isKeyPressed(Keyboard::Down))
 				{
 					rightPlayer.moveDown(rightPlayer);
-					
+
 					if (rightPlayer.m_Shape.getGlobalBounds().top + rightPlayer.m_Shape.getGlobalBounds().height > window.getSize().y)
 					{
 						rightPlayer.moveUp(rightPlayer);
 					}
-				}				
+				}
 			}
 		}
 
 		ball1.ballMoving(ball1, window);
 		ball1.Collision(ball1, leftPlayer, rightPlayer);
-
 
 		window.clear();
 
@@ -157,9 +196,6 @@ void App::pvp_game(RenderWindow & window) const
 		window.draw(ball1.getShape());
 
 		// Menu display
-
-		window.draw(menu_background.get_menu_shape());
-		window.draw(menu_item1.get_menu_shape());
 
 
 		window.display();
