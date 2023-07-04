@@ -8,39 +8,39 @@
 using namespace sf;
 using namespace std;
 
+RenderWindow window(VideoMode(1400, 700), "", Style::Default);
 
 void App::show_menu(RenderWindow& window)
 {
+	// Object 
 	App pvpGame;
-
 
 	float menuHeight = window.getSize().x;
 	float menuWidth = window.getSize().y;
 
-	RenderWindow MENU(VideoMode(menuHeight, menuWidth), "Menu", Style::Default);
-	GameMenu menu(MENU.getSize().x, MENU.getSize().y, MENU);
+	GameMenu menu(window.getSize().x, window.getSize().y, window);
 
-	while (MENU.isOpen())
+	while (window.isOpen())
 	{
 		Event menuEvent;
 
-		while (MENU.pollEvent(menuEvent))
+		while (window.pollEvent(menuEvent))
 		{
-			if (menuEvent.type == menuEvent.Closed())
+			if (menuEvent.key.code == Keyboard::Escape)
 			{
-				MENU.close();
+				window.close();
 			}
 
 			if (menuEvent.type == Event::KeyReleased)
 			{
-				if (menuEvent.key.code == Keyboard::Up)
+				if (menuEvent.key.code == Keyboard::Up || menuEvent.key.code == Keyboard::W)
 				{
 					menu.menuMoveUp();
 					cout << "menu.menuPress() = " << menu.menuPress() << endl;
 					break;
 				}
 
-				if (menuEvent.key.code == Keyboard::Down)
+				if (menuEvent.key.code == Keyboard::Down || menuEvent.key.code == Keyboard::S)
 				{
 					menu.menuMoveDown();
 					cout << "menu.menuPress() = " << menu.menuPress() << endl;
@@ -56,21 +56,31 @@ void App::show_menu(RenderWindow& window)
 						pvpGame.pvp_game(window);
 					}
 
+					if (choise == 1)
+					{
+						pvpGame.online_game();
+					}
+
 				}
 			}
 		}
 
-		MENU.clear();
-		menu.showMenu(MENU);
-		MENU.display();
+		window.clear();
+		menu.showMenuItems(window);
+		menu.showHeader(window);
+		window.display();
 	}
+}
+
+void App::online_game()
+{
+	cout << "Online is work\n";
 }
 
 void App::pvp_game(RenderWindow& window) const
 {
 	srand(time(NULL));
 	window.setFramerateLimit(60);
-
 	/* Player on the left */
 	
 	// Player size
@@ -120,11 +130,6 @@ void App::pvp_game(RenderWindow& window) const
 
 	ball1.setBallPositionX(ballPosX);
 	ball1.setBallPositionX(ballPosY);
-
-	/* Menu */ 
-
-	
-
 
 	// Game window
 
@@ -196,8 +201,12 @@ void App::pvp_game(RenderWindow& window) const
 		window.draw(ball1.getShape());
 
 		// Menu display
-
-
 		window.display();
 	}	
+}
+
+void App::startGame()
+{
+	App game;
+	game.show_menu(window);
 }

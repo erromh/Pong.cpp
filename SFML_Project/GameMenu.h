@@ -12,12 +12,14 @@ private:
 	int gameMenuSelected;
 	Font font;
 	Text mainMenu[max_menu_items];
+	Text header;
 
 public:
 
 	GameMenu(float width, float height, RenderWindow const& menuWindow);
 
-	void showMenu(RenderWindow& menuWindow);
+	void showMenuItems(RenderWindow& menuWindow);
+	void showHeader(RenderWindow& menuWindow);
 	void menuMoveUp();
 	void menuMoveDown();
 
