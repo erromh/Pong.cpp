@@ -4,10 +4,11 @@
 #include <memory>
 #include "Ball.h"
 #include "Players.h"
+#include "App.h"
 
 Ball::Ball(Vector2f velocity, Color ballColor)
 {
-	m_ballShape.setSize(Vector2f(32, 32));
+	m_ballShape.setRadius(16.0);
 
 	setBallVelocityX(velocity.x);
 	setBallVelocityY(velocity.y);
@@ -27,10 +28,12 @@ void Ball::ballMoving(Ball const& ball, RenderWindow const & window)
 	m_position.x += m_xVelocity;
 	m_position.y += m_yVelocity;
 
+	App app;
+
 	if ((m_position.x + ball.m_ballShape.getGlobalBounds().width) > window.getSize().x || (m_position.x) < 0)
 	{
 		m_xVelocity *= -1;
-		//gameOver();
+		app.endGame();
 	}
 
 	if ((m_position.y) > (window.getSize().y - ball.m_ballShape.getGlobalBounds().width) || (m_position.y) < 0)
@@ -135,7 +138,7 @@ void Ball::setBallVelocityY(float yVelocity)
 
 // Return the shape of ball
 
-RectangleShape Ball::getShape()
+CircleShape Ball::getShape()
 {
 	return m_ballShape;
 }

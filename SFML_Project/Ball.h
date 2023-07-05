@@ -10,7 +10,7 @@ class Ball
 	friend class App;
 
 private:
-	RectangleShape m_ballShape;
+	CircleShape m_ballShape;
 	Vector2f m_position;
 
 	float m_xVelocity = 8;
@@ -20,7 +20,7 @@ public:
 	Ball(Vector2f, Color);
 	~Ball();
 
-	RectangleShape getShape();
+	CircleShape getShape();
 
 	void ballMoving(Ball const& ball, RenderWindow const & window);
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <ctime>
+#include <vector>
 #include "App.h"
 #include "Players.h"
 #include "GameMenu.h"
@@ -8,7 +9,7 @@
 using namespace sf;
 using namespace std;
 
-RenderWindow window(VideoMode(1400, 700), "", Style::Default);
+RenderWindow window(VideoMode(1500, 800), "", Style::Default);
 
 void App::show_menu(RenderWindow& window)
 {
@@ -26,10 +27,6 @@ void App::show_menu(RenderWindow& window)
 
 		while (window.pollEvent(menuEvent))
 		{
-			if (menuEvent.key.code == Keyboard::Escape)
-			{
-				window.close();
-			}
 
 			if (menuEvent.type == Event::KeyReleased)
 			{
@@ -61,6 +58,46 @@ void App::show_menu(RenderWindow& window)
 						pvpGame.online_game();
 					}
 
+
+
+					//////////////////////////////////////////////////
+					if (choise == 2)
+					{
+						RenderWindow newWindow(VideoMode(500, 500), "", Style::Default);
+
+						while (newWindow.isOpen())
+						{
+							Event jokeEvent;
+
+							Texture text;
+							text.loadFromFile("D:/c++++/SFML_Project/sovok.PNG");
+
+							Sprite sss;
+							sss.setTexture(text);
+
+							while (newWindow.pollEvent(jokeEvent))
+							{
+								if (jokeEvent.key.code == Keyboard::Escape)
+								{
+									newWindow.close();
+								}
+							}
+
+							newWindow.clear();
+							newWindow.draw(sss);
+							newWindow.display();
+						}
+
+						std::cout << "About game\n";
+					}
+					///////////////////////////////////////////////////////////////////////////
+
+
+					if (choise == 3)
+					{
+						window.close();
+					}
+
 				}
 			}
 		}
@@ -83,11 +120,11 @@ void App::pvp_game(RenderWindow& window) const
 	window.setFramerateLimit(60);
 	/* Player on the left */
 	
-	// Player size
-	Vector2f leftSize(25, 150);
+	// Players size
+	Vector2f playerZize(25, 150);
 
 	// Position y
-	float PlayersPosY = ((window.getSize().y / 2.0) - (leftSize.y / 2));
+	float PlayersPosY = ((window.getSize().y / 2.0) - (playerZize.y / 2));
 	
 	// Velocity
 	float Velocity = 20;
@@ -96,10 +133,10 @@ void App::pvp_game(RenderWindow& window) const
 	Vector2f leftPosition(0, PlayersPosY);
 	
 	// Player color
-	Color playersColor(135, 206, 235);
+	Color playersColor(240, 255, 240);
 
 	// Create player
-	Players leftPlayer(leftSize, leftPosition, playersColor);
+	Players leftPlayer(playerZize, leftPosition, playersColor);
 	
 	// Set velocity
 	leftPlayer.setVelocity(Velocity);
@@ -107,29 +144,35 @@ void App::pvp_game(RenderWindow& window) const
 
 	/* Player on the right */
 
-	Vector2f rightSize(25, 150);
+	// 
 
-	float rightPlayerPosX = (window.getSize().x - rightSize.x);
-	float rightPlayerPosY = ((window.getSize().y / 2.0) - (rightSize.y / 2));
+	float rightPlayerPosX = (window.getSize().x - playerZize.x);
+	float rightPlayerPosY = ((window.getSize().y / 2.0) - (playerZize.y / 2));
 
 	Vector2f rightPosition(rightPlayerPosX, rightPlayerPosY);
-	Players rightPlayer(rightSize, rightPosition, playersColor);
+	Players rightPlayer(playerZize, rightPosition, playersColor);
 
 	rightPlayer.setVelocity(Velocity);
 
 
 	/* Ball */
 
+	// Velocity
 	Vector2f ballVelocity(8, 8);	
-	Color colorBall(96, 18, 223);
+	
+	// Color ball
+	Color colorBall(255, 0, 0);
 
+	// Object of ball class
 	Ball ball1(ballVelocity, colorBall);
 
+	// Posotion
 	float ballPosX = (window.getSize().x / 2.0);
 	float ballPosY = (window.getSize().y / 2.0);
 
 	ball1.setBallPositionX(ballPosX);
 	ball1.setBallPositionX(ballPosY);
+
 
 	// Game window
 
@@ -191,7 +234,9 @@ void App::pvp_game(RenderWindow& window) const
 		ball1.ballMoving(ball1, window);
 		ball1.Collision(ball1, leftPlayer, rightPlayer);
 
-		window.clear();
+		Color windowColor(0, 0, 205);
+
+		window.clear(windowColor);
 
 		// Players display
 		window.draw(leftPlayer.getShape());
@@ -209,4 +254,9 @@ void App::startGame()
 {
 	App game;
 	game.show_menu(window);
+}
+
+void App::endGame()
+{
+	cout << "end game\n";
 }

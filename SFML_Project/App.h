@@ -13,5 +13,6 @@ public:
 	void show_menu(RenderWindow& window);
 	void online_game();
 	void startGame();
+	void endGame();
 };
 
