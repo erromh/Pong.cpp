@@ -9,7 +9,7 @@
 using namespace sf;
 using namespace std;
 
-RenderWindow window(VideoMode(1500, 800), "", Style::Default);
+RenderWindow window(VideoMode(1500, 800), "App", Style::Default);
 App pvpGame; 
 App game;
 
@@ -17,7 +17,6 @@ void App::show_menu(RenderWindow& window)
 {
 	// Object 
 	
-
 	float menuHeight = window.getSize().x;
 	float menuWidth = window.getSize().y;
 
@@ -232,12 +231,13 @@ void App::endGame()
 	Font endGameFont;
 	endGameFont.loadFromFile("D:/c++++/SFML_Project/MilkyMania.ttf");
 	int CharacterSize = 40;
-	int exitDecision = 0;
+	
+	int exitDecision = -1;
 
-	Text toBeContinued[2];
+	Text toBeContinued[3];
 
 	toBeContinued[0].setFont(endGameFont);
-	toBeContinued[0].setString("Play again ?");
+	toBeContinued[0].setString("Play again");
 	toBeContinued[0].setCharacterSize(CharacterSize);
 	toBeContinued[0].setPosition(50, 200);
 
@@ -245,6 +245,13 @@ void App::endGame()
 	toBeContinued[1].setString("Go to menu");
 	toBeContinued[1].setCharacterSize(CharacterSize);
 	toBeContinued[1].setPosition(300, 200);
+
+	toBeContinued[2].setFont(endGameFont);
+	toBeContinued[2].setString("Exit");
+	toBeContinued[2].setCharacterSize(CharacterSize);
+	toBeContinued[2].setPosition(125, 300);
+
+	// This window appears when the game ends.
 
 	while (endGameWindow.isOpen())
 	{
@@ -254,38 +261,42 @@ void App::endGame()
 		{
 			if (Keyboard::isKeyPressed(Keyboard::Right))
 			{
-				exitDecision++;
-
-				if (exitDecision > 1)
+				if (exitDecision < 3)
 				{
-					exitDecision = 0;
-				}
+					toBeContinued[exitDecision].setFillColor(Color::White);
 
+					exitDecision++;
+
+					if (exitDecision == 3)
+					{
+						exitDecision = 0;
+					}
+
+					toBeContinued[exitDecision].setFillColor(Color::Yellow);
+				}
 				cout << "Right keyboard pressed\n";
 			}
 
 			if (Keyboard::isKeyPressed(Keyboard::Left))
 			{
-				exitDecision--;
-
-				if (exitDecision < 0)
+				if (exitDecision >= 0)
 				{
-					exitDecision = 1;
+					toBeContinued[exitDecision].setFillColor(Color::White);
+
+					exitDecision--;
+
+					if (exitDecision == -1)
+					{
+						exitDecision = 2;
+					}
+
+					toBeContinued[exitDecision].setFillColor(Color::Yellow);
 				}
-
-				cout << "Left keyboard pressed\n";
 			}
 
-			if (exitDecision == 0)
+			if (Keyboard::isKeyPressed(Keyboard::C))
 			{
-				toBeContinued[0].setFillColor(Color::Yellow);
-				toBeContinued[1].setFillColor(Color::White);
-			}
-
-			if (exitDecision == 1)
-			{
-				toBeContinued[0].setFillColor(Color::White);
-				toBeContinued[1].setFillColor(Color::Yellow);
+				cout << "exitDecision = " << exitDecision << endl;
 			}
 
 			if (Keyboard::isKeyPressed(Keyboard::Enter))
@@ -293,20 +304,22 @@ void App::endGame()
 				if (exitDecision == 0)
 				{
 					pvpGame.pvp_game(window);
-					endGameWindow.close();
 				}
 
 				if (exitDecision == 1)
 				{
 					game.show_menu(window);
+				}
+
+				if (exitDecision == 2)
+				{
 					endGameWindow.close();
 				}
 			}
 		}
 
-
 		endGameWindow.clear();
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < 3; i++)
 		{ endGameWindow.draw(toBeContinued[i]); }
 		endGameWindow.display();
 	}
