@@ -10,11 +10,13 @@ using namespace sf;
 using namespace std;
 
 RenderWindow window(VideoMode(1500, 800), "", Style::Default);
+App pvpGame; 
+App game;
 
 void App::show_menu(RenderWindow& window)
 {
 	// Object 
-	App pvpGame;
+	
 
 	float menuHeight = window.getSize().x;
 	float menuWidth = window.getSize().y;
@@ -27,7 +29,6 @@ void App::show_menu(RenderWindow& window)
 
 		while (window.pollEvent(menuEvent))
 		{
-
 			if (menuEvent.type == Event::KeyReleased)
 			{
 				if (menuEvent.key.code == Keyboard::Up || menuEvent.key.code == Keyboard::W)
@@ -58,46 +59,15 @@ void App::show_menu(RenderWindow& window)
 						pvpGame.online_game();
 					}
 
-
-
-					//////////////////////////////////////////////////
 					if (choise == 2)
 					{
-						RenderWindow newWindow(VideoMode(500, 500), "", Style::Default);
-
-						while (newWindow.isOpen())
-						{
-							Event jokeEvent;
-
-							Texture text;
-							text.loadFromFile("D:/c++++/SFML_Project/sovok.PNG");
-
-							Sprite sss;
-							sss.setTexture(text);
-
-							while (newWindow.pollEvent(jokeEvent))
-							{
-								if (jokeEvent.key.code == Keyboard::Escape)
-								{
-									newWindow.close();
-								}
-							}
-
-							newWindow.clear();
-							newWindow.draw(sss);
-							newWindow.display();
-						}
-
 						std::cout << "About game\n";
 					}
-					///////////////////////////////////////////////////////////////////////////
-
 
 					if (choise == 3)
 					{
 						window.close();
 					}
-
 				}
 			}
 		}
@@ -252,11 +222,94 @@ void App::pvp_game(RenderWindow& window) const
 
 void App::startGame()
 {
-	App game;
 	game.show_menu(window);
 }
 
 void App::endGame()
 {
+	RenderWindow endGameWindow(VideoMode(600, 400), "", Style::Default);
+	
+	Font endGameFont;
+	endGameFont.loadFromFile("D:/c++++/SFML_Project/MilkyMania.ttf");
+	int CharacterSize = 40;
+	int exitDecision = 0;
+
+	Text toBeContinued[2];
+
+	toBeContinued[0].setFont(endGameFont);
+	toBeContinued[0].setString("Play again ?");
+	toBeContinued[0].setCharacterSize(CharacterSize);
+	toBeContinued[0].setPosition(50, 200);
+
+	toBeContinued[1].setFont(endGameFont);
+	toBeContinued[1].setString("Go to menu");
+	toBeContinued[1].setCharacterSize(CharacterSize);
+	toBeContinued[1].setPosition(300, 200);
+
+	while (endGameWindow.isOpen())
+	{
+		Event endEvent;
+
+		while (endGameWindow.pollEvent(endEvent))
+		{
+			if (Keyboard::isKeyPressed(Keyboard::Right))
+			{
+				exitDecision++;
+
+				if (exitDecision > 1)
+				{
+					exitDecision = 0;
+				}
+
+				cout << "Right keyboard pressed\n";
+			}
+
+			if (Keyboard::isKeyPressed(Keyboard::Left))
+			{
+				exitDecision--;
+
+				if (exitDecision < 0)
+				{
+					exitDecision = 1;
+				}
+
+				cout << "Left keyboard pressed\n";
+			}
+
+			if (exitDecision == 0)
+			{
+				toBeContinued[0].setFillColor(Color::Yellow);
+				toBeContinued[1].setFillColor(Color::White);
+			}
+
+			if (exitDecision == 1)
+			{
+				toBeContinued[0].setFillColor(Color::White);
+				toBeContinued[1].setFillColor(Color::Yellow);
+			}
+
+			if (Keyboard::isKeyPressed(Keyboard::Enter))
+			{
+				if (exitDecision == 0)
+				{
+					pvpGame.pvp_game(window);
+					endGameWindow.close();
+				}
+
+				if (exitDecision == 1)
+				{
+					game.show_menu(window);
+					endGameWindow.close();
+				}
+			}
+		}
+
+
+		endGameWindow.clear();
+		for (int i = 0; i < 2; i++)
+		{ endGameWindow.draw(toBeContinued[i]); }
+		endGameWindow.display();
+	}
+
 	cout << "end game\n";
 }
