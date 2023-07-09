@@ -6,6 +6,8 @@
 #include "Players.h"
 #include "GameMenu.h"
 
+// Look at sfml book and try to rewrite ball trajectory 
+
 using namespace sf;
 using namespace std;
 
@@ -15,10 +17,8 @@ App game;
 
 void App::show_menu(RenderWindow& window)
 {
-	// Object 
-	
-	float menuHeight = window.getSize().x;
-	float menuWidth = window.getSize().y;
+	int menuHeight = window.getSize().x;
+	int menuWidth =  window.getSize().y;
 
 	GameMenu menu(window.getSize().x, window.getSize().y, window);
 
@@ -85,8 +85,9 @@ void App::online_game()
 
 void App::pvp_game(RenderWindow& window) const
 {
+	//window.setFramerateLimit(60);
 	srand(time(NULL));
-	window.setFramerateLimit(60);
+	
 	/* Player on the left */
 	
 	// Players size
@@ -111,9 +112,7 @@ void App::pvp_game(RenderWindow& window) const
 	leftPlayer.setVelocity(Velocity);
 
 
-	/* Player on the right */
-
-	// 
+	/* Player on the right */ 
 
 	float rightPlayerPosX = (window.getSize().x - playerZize.x);
 	float rightPlayerPosY = ((window.getSize().y / 2.0) - (playerZize.y / 2));
@@ -125,22 +124,27 @@ void App::pvp_game(RenderWindow& window) const
 
 
 	/* Ball */
-
-	// Velocity
-	Vector2f ballVelocity(8, 8);	
 	
 	// Color ball
 	Color colorBall(255, 0, 0);
 
 	// Object of ball class
-	Ball ball1(ballVelocity, colorBall);
 
 	// Posotion
-	float ballPosX = (window.getSize().x / 2.0);
+	float ballPosX = (window.getSize().x / 4.0);
 	float ballPosY = (window.getSize().y / 2.0);
 
+	Ball ball1(colorBall);
+
 	ball1.setBallPositionX(ballPosX);
-	ball1.setBallPositionX(ballPosY);
+	ball1.setBallPositionY(ballPosY);
+
+
+	float xCoordinate = rand() % 10;
+	float yCoordinate = rand() % 10;
+
+	ball1.setX(xCoordinate);
+	ball1.setY(yCoordinate);
 
 
 	// Game window
@@ -197,11 +201,21 @@ void App::pvp_game(RenderWindow& window) const
 						rightPlayer.moveUp(rightPlayer);
 					}
 				}
+
+				if (Keyboard::isKeyPressed(Keyboard::G))
+				{
+					cout << "Ball width = " << ball1.getShape().getGlobalBounds().width << endl;
+				}
 			}
 		}
 
-		ball1.ballMoving(ball1, window);
-		ball1.Collision(ball1, leftPlayer, rightPlayer);
+
+		Clock clock;
+		Time dt = clock.restart();
+
+		ball1.ballMoving(ball1, dt);
+
+		ball1.Collision(ball1, leftPlayer, rightPlayer, window);
 
 		Color windowColor(0, 0, 205);
 
@@ -214,8 +228,8 @@ void App::pvp_game(RenderWindow& window) const
 		// Ball display
 		window.draw(ball1.getShape());
 
-		// Menu display
 		window.display();
+		sleep(milliseconds(int(1000/120)));
 	}	
 }
 
@@ -234,22 +248,22 @@ void App::endGame()
 	
 	int exitDecision = -1;
 
-	Text toBeContinued[3];
+	Text *toBeContinued = new Text[3];
 
 	toBeContinued[0].setFont(endGameFont);
 	toBeContinued[0].setString("Play again");
 	toBeContinued[0].setCharacterSize(CharacterSize);
-	toBeContinued[0].setPosition(50, 200);
+	toBeContinued[0].setPosition(50, 100);
 
 	toBeContinued[1].setFont(endGameFont);
 	toBeContinued[1].setString("Go to menu");
 	toBeContinued[1].setCharacterSize(CharacterSize);
-	toBeContinued[1].setPosition(300, 200);
+	toBeContinued[1].setPosition(50, 200);
 
 	toBeContinued[2].setFont(endGameFont);
 	toBeContinued[2].setString("Exit");
 	toBeContinued[2].setCharacterSize(CharacterSize);
-	toBeContinued[2].setPosition(125, 300);
+	toBeContinued[2].setPosition(50, 300);
 
 	// This window appears when the game ends.
 
@@ -259,7 +273,7 @@ void App::endGame()
 
 		while (endGameWindow.pollEvent(endEvent))
 		{
-			if (Keyboard::isKeyPressed(Keyboard::Right))
+			if (Keyboard::isKeyPressed(Keyboard::Right) || Keyboard::isKeyPressed(Keyboard::Down))
 			{
 				if (exitDecision < 3)
 				{
@@ -277,7 +291,7 @@ void App::endGame()
 				cout << "Right keyboard pressed\n";
 			}
 
-			if (Keyboard::isKeyPressed(Keyboard::Left))
+			if (Keyboard::isKeyPressed(Keyboard::Left) || Keyboard::isKeyPressed(Keyboard::Up))
 			{
 				if (exitDecision >= 0)
 				{
@@ -303,17 +317,20 @@ void App::endGame()
 			{
 				if (exitDecision == 0)
 				{
+					endGameWindow.close();
 					pvpGame.pvp_game(window);
 				}
 
 				if (exitDecision == 1)
 				{
+					endGameWindow.close();
 					game.show_menu(window);
 				}
 
 				if (exitDecision == 2)
 				{
 					endGameWindow.close();
+					window.close();
 				}
 			}
 		}
@@ -323,6 +340,8 @@ void App::endGame()
 		{ endGameWindow.draw(toBeContinued[i]); }
 		endGameWindow.display();
 	}
+
+	delete[]toBeContinued;
 
 	cout << "end game\n";
 }

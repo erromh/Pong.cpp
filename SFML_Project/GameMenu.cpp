@@ -90,7 +90,7 @@ void GameMenu::menuMoveUp()
 
 		if (gameMenuSelected == -1)
 		{
-			gameMenuSelected = 2;
+			gameMenuSelected = 4;
 		}
 
 		mainMenu[gameMenuSelected].setFillColor(Color::White);

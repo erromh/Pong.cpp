@@ -2,16 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
 #include <memory>
+#include <ctime>
 #include "Ball.h"
 #include "Players.h"
 #include "App.h"
 
-Ball::Ball(Vector2f velocity, Color ballColor)
+Ball::Ball(Color ballColor)
 {
 	m_ballShape.setRadius(16.0);
-
-	setBallVelocityX(velocity.x);
-	setBallVelocityY(velocity.y);
 
 	m_ballShape.setFillColor(ballColor);
 
@@ -23,37 +21,22 @@ Ball::~Ball()
 	std::cout << "destructor called\n";
 }
 
-void Ball::ballMoving(Ball const& ball, RenderWindow const & window)
+void Ball::ballMoving(Ball const& ball, Time dt)
 {
-	m_position.x += m_xVelocity;
-	m_position.y += m_yVelocity;
+	m_position.x += dx1;
+	m_position.y += dy1;
 
-	App app;
-
-	if ((m_position.x + ball.m_ballShape.getGlobalBounds().width) > window.getSize().x || (m_position.x) < 0)
-	{
-		m_xVelocity *= -1;
-		app.endGame();
-	}
-
-	if ((m_position.y) > (window.getSize().y - ball.m_ballShape.getGlobalBounds().width) || (m_position.y) < 0)
-	{
-		m_yVelocity *= -1;
-	}
-	
 	m_ballShape.setPosition(m_position);
+
 }
 
-
-// Checking collisions
-
-void Ball::Collision(Ball const& ball, Players const& players, Players const& rightplayer)
+void Ball::Collision(Ball const& ball, Players const& leftPlayer, Players const& rightplayer, RenderWindow const& window)
 {
-	// Ñollision with left player
+	// Ñollision with LEFT player
 
-	if (players.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
+	if (leftPlayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
 	{
-		m_xVelocity *= -1;
+		dx1 = -dx1;
 		std::cout << "Left collosion\n";
 	}
 
@@ -61,31 +44,32 @@ void Ball::Collision(Ball const& ball, Players const& players, Players const& ri
 
 	if (rightplayer.m_Shape.getGlobalBounds().intersects(ball.m_ballShape.getGlobalBounds()))
 	{
-		m_xVelocity *= -1;
+		dx1 = -dx1;
 		std::cout << "Right collision getGlobalBounds()\n";
 	}
+
+	// X board collison
+
+	App app;
+
+	if ((m_position.x + m_ballShape.getRadius()) > window.getSize().x || (m_position.x - m_ballShape.getRadius() < 0))
+		/*m_position.x + ball.m_ballShape.getRadius()) >= window.getSize().x || (m_position.x) < 0*/
+	{
+		dx1 = -dx1;
+		//app.endGame();
+	}
+
+	// Y board collision
+
+	if ((m_position.y + m_ballShape.getRadius()) >= window.getSize().y || (m_position.y - m_ballShape.getRadius() <= 0))
+		/*(m_position.y) >= (window.getSize().y - ball.m_ballShape.getRadius()) || (m_position.y) < 0)*/
+	{
+		dy1 = -dy1;
+	}
+
+	//m_ballShape.setPosition(m_position);
 }
 
-bool Ball::gameOver()
-{
-	/* 
-	 1) Stop tha ball
-	 2) Display an insciption that the game is over
-	 3) Indicate who won
-	 4) Restart the game (button maybe. think about it !!!)
-	 */
-
-	setBallVelocityX(0);
-	setBallVelocityY(0);
-
-	//void Players::getPositionX()
-
-	m_ballShape.setFillColor(Color::Transparent);
-
-	std::cout << "Game over\n";
-
-	return true;
-}
 
 
 // Get and set ball's X position 
@@ -112,28 +96,29 @@ void Ball::setBallPositionY(float const& ball_y)
 	m_position.y = ball_y;
 }
 
-// Get and set ball's X velocity
+// Get and set direction vector coordinate
 
-float Ball::getBallVelocityX()
+// X coordinate
+float Ball::getX()
 {
-	return m_xVelocity;
+	return dx1;
 }
 
-void Ball::setBallVelocityX(float xVelocity)
+void Ball::setX(const float& x)
 {
-	m_xVelocity = xVelocity;
+	dx1 = x;
 }
 
-// Get and set ball's Y velocity
+// Y coordinate
 
-float Ball::getBallVelocityY()
+float Ball::getY()
 {
-	return m_yVelocity;
+	return dy1;
 }
 
-void Ball::setBallVelocityY(float yVelocity)
+void Ball::setY(const float& y)
 {
-	m_yVelocity = yVelocity;
+	dy1 = y;
 }
 
 // Return the shape of ball

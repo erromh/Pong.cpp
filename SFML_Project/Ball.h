@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <memory>
+#include <ctime>
 #include "Players.h"
 using namespace sf;
 
@@ -10,21 +10,28 @@ class Ball
 	friend class App;
 
 private:
+
+
 	CircleShape m_ballShape;
 	Vector2f m_position;
 
-	float m_xVelocity = 8;
-	float m_yVelocity = 8;
+	float m_DirectionX = 100.0f;
+	float m_DirectionY = 100.0f;
+
+	float m_velocity = 25000.f;
+
+	float dx1 = rand() % 10;
+	float dy1 = rand() % 10;
 
 public:
-	Ball(Vector2f, Color);
+	Ball(Color color);
 	~Ball();
 
 	CircleShape getShape();
 
-	void ballMoving(Ball const& ball, RenderWindow const & window);
+	void ballMoving(Ball const& ball, Time dt);
 
-	void Collision(Ball const& ball, Players const& players, Players const& rightplayer);
+	void Collision(Ball const& ball, Players const& players, Players const& rightplayer, RenderWindow const& window);
 
 	float getBallPositionX();
 	void setBallPositionX(float const&);
@@ -32,12 +39,10 @@ public:
 	float getBallPositionY();
 	void setBallPositionY(float const&);
 
-	float getBallVelocityX();
-	void setBallVelocityX(float xVelocity);
+	float getX();
+	void setX(float const& x);
 
-	float getBallVelocityY();
-	void setBallVelocityY(float yVelocity);
-
-	bool gameOver();
+	float getY();
+	void setY(float const&);
 };
 

@@ -4,9 +4,8 @@
 int main()
 {
     App application;
-    //application.startGame();
+    application.startGame();
 
-    application.endGame();
-
+    //application.endGame();
     return 0;
 }
