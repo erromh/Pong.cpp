@@ -16,7 +16,6 @@ GameMenu::GameMenu(float width, float height, RenderWindow const& menuWindow)
 	float MenuItemY = static_cast<float>(menuWindow.getSize().y / 2);
 
 	// Header
-
 	header.setFont(font);
 	header.setFillColor(Color::Cyan);
 	header.setString("Cool pong");
@@ -24,7 +23,6 @@ GameMenu::GameMenu(float width, float height, RenderWindow const& menuWindow)
 	header.setPosition(MenuItemX, 100);
 
 	// PvP game
-
 	int fontSize = 50;
 	
 	mainMenu[0].setFont(font);

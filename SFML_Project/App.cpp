@@ -1,5 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Network.hpp>
 #include <ctime>
 #include <vector>
 #include "App.h"
@@ -130,25 +131,24 @@ void App::pvp_game(RenderWindow& window) const
 
 	// Object of ball class
 
-	// Posotion
-	float ballPosX = (window.getSize().x / 4.0);
+	// Position determination
+	float ballPosX = (window.getSize().x / 2.0);
 	float ballPosY = (window.getSize().y / 2.0);
 
 	Ball ball1(colorBall);
-
+	
+	// Set posotion
 	ball1.setBallPositionX(ballPosX);
 	ball1.setBallPositionY(ballPosY);
 
+	// Determination of coordinates
+	float ballCoordinate = 10;
 
-	float xCoordinate = rand() % 10;
-	float yCoordinate = rand() % 10;
-
-	ball1.setX(xCoordinate);
-	ball1.setY(yCoordinate);
-
+	// Set the coordinates
+	ball1.setX(ballCoordinate);
+	ball1.setY(ballCoordinate);
 
 	// Game window
-
 	while (window.isOpen())
 	{
 		Event event;
@@ -210,15 +210,16 @@ void App::pvp_game(RenderWindow& window) const
 		}
 
 
-		Clock clock;
-		Time dt = clock.restart();
 
-		ball1.ballMoving(ball1, dt);
-
+		ball1.ballMoving(ball1);
 		ball1.Collision(ball1, leftPlayer, rightPlayer, window);
+		ball1.counter(ball1, window);
+
+		Image icon;
+		icon.loadFromFile("D:/c++++/SFML_Project/appicon.png");
+		window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 		Color windowColor(0, 0, 205);
-
 		window.clear(windowColor);
 
 		// Players display

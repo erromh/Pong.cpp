@@ -11,9 +11,13 @@ class Ball
 
 private:
 
-
 	CircleShape m_ballShape;
 	Vector2f m_position;
+
+	Text count;
+
+	int countLeft = 0;
+	int countRight = 0;
 
 	float m_DirectionX = 100.0f;
 	float m_DirectionY = 100.0f;
@@ -29,9 +33,13 @@ public:
 
 	CircleShape getShape();
 
-	void ballMoving(Ball const& ball, Time dt);
+	void ballMoving(Ball const& ball);
 
 	void Collision(Ball const& ball, Players const& players, Players const& rightplayer, RenderWindow const& window);
+
+	void counter(Ball const& ball, RenderWindow const& window);
+
+	Text getCounter();
 
 	float getBallPositionX();
 	void setBallPositionX(float const&);

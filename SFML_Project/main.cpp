@@ -5,7 +5,5 @@ int main()
 {
     App application;
     application.startGame();
-
-    //application.endGame();
     return 0;
 }

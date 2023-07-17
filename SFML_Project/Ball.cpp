@@ -21,13 +21,44 @@ Ball::~Ball()
 	std::cout << "destructor called\n";
 }
 
-void Ball::ballMoving(Ball const& ball, Time dt)
+void Ball::ballMoving(Ball const& ball)
 {
 	m_position.x += dx1;
 	m_position.y += dy1;
 
 	m_ballShape.setPosition(m_position);
+}
 
+void Ball::counter(Ball const& ball, RenderWindow const& window)
+{
+	// X
+	if ((m_position.x + m_ballShape.getRadius()) > window.getSize().x)
+	{
+		countLeft++;
+	}
+
+	if ((m_position.x - m_ballShape.getRadius() < 0))
+	{
+
+	}
+
+	// Y
+	if ((m_position.y + m_ballShape.getRadius()) >= window.getSize().y || (m_position.y - m_ballShape.getRadius() <= 0))
+	{
+
+	}
+
+	
+	Font countFont;
+	countFont.loadFromFile("D:/c++++/SFML_Project/MilkyMania.ttf");
+	count.setFont(countFont);
+	count.setCharacterSize(40);
+	count.setPosition(200, 200);
+
+	char cLeft = static_cast<char>(countLeft);
+	char cRight = static_cast<char>(countRight);
+	
+	count.setString(cLeft);	
 }
 
 void Ball::Collision(Ball const& ball, Players const& leftPlayer, Players const& rightplayer, RenderWindow const& window)
@@ -53,24 +84,26 @@ void Ball::Collision(Ball const& ball, Players const& leftPlayer, Players const&
 	App app;
 
 	if ((m_position.x + m_ballShape.getRadius()) > window.getSize().x || (m_position.x - m_ballShape.getRadius() < 0))
-		/*m_position.x + ball.m_ballShape.getRadius()) >= window.getSize().x || (m_position.x) < 0*/
 	{
 		dx1 = -dx1;
-		//app.endGame();
+		app.endGame();
 	}
 
 	// Y board collision
 
 	if ((m_position.y + m_ballShape.getRadius()) >= window.getSize().y || (m_position.y - m_ballShape.getRadius() <= 0))
-		/*(m_position.y) >= (window.getSize().y - ball.m_ballShape.getRadius()) || (m_position.y) < 0)*/
 	{
 		dy1 = -dy1;
 	}
 
-	//m_ballShape.setPosition(m_position);
 }
 
+// Get text counter
 
+Text Ball::getCounter()
+{
+	return count;
+}
 
 // Get and set ball's X position 
 
