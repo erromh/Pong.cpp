@@ -1,7 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <stdlib.h>
-#include <memory>
+#include <cmath>
 #include <ctime>
 #include "Ball.h"
 #include "Players.h"
@@ -29,37 +29,6 @@ void Ball::ballMoving(Ball const& ball)
 	m_ballShape.setPosition(m_position);
 }
 
-void Ball::counter(Ball const& ball, RenderWindow const& window)
-{
-	// X
-	if ((m_position.x + m_ballShape.getRadius()) > window.getSize().x)
-	{
-		countLeft++;
-	}
-
-	if ((m_position.x - m_ballShape.getRadius() < 0))
-	{
-
-	}
-
-	// Y
-	if ((m_position.y + m_ballShape.getRadius()) >= window.getSize().y || (m_position.y - m_ballShape.getRadius() <= 0))
-	{
-
-	}
-
-	
-	Font countFont;
-	countFont.loadFromFile("D:/c++++/SFML_Project/MilkyMania.ttf");
-	count.setFont(countFont);
-	count.setCharacterSize(40);
-	count.setPosition(200, 200);
-
-	char cLeft = static_cast<char>(countLeft);
-	char cRight = static_cast<char>(countRight);
-	
-	count.setString(cLeft);	
-}
 
 void Ball::Collision(Ball const& ball, Players const& leftPlayer, Players const& rightplayer, RenderWindow const& window)
 {
@@ -95,15 +64,8 @@ void Ball::Collision(Ball const& ball, Players const& leftPlayer, Players const&
 	{
 		dy1 = -dy1;
 	}
-
 }
 
-// Get text counter
-
-Text Ball::getCounter()
-{
-	return count;
-}
 
 // Get and set ball's X position 
 

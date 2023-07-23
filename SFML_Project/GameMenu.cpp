@@ -5,8 +5,13 @@
 using namespace std;
 using namespace sf;
 
+Color menuColor = Color::Black;
+Color choiceColor(169, 169, 169);
+
 GameMenu::GameMenu(float width, float height, RenderWindow const& menuWindow)
 {
+	int fontSize = (menuWindow.getSize().x / 30);
+
 	if (!font.loadFromFile("D:/c++++/SFML_Project/MilkyMania.ttf"))
 	{
 		cout << "No fonts\n";
@@ -23,31 +28,29 @@ GameMenu::GameMenu(float width, float height, RenderWindow const& menuWindow)
 	header.setPosition(MenuItemX, 100);
 
 	// PvP game
-	int fontSize = 50;
-	
 	mainMenu[0].setFont(font);
-	mainMenu[0].setFillColor(Color::Blue);
+	mainMenu[0].setFillColor(menuColor);
 	mainMenu[0].setString("PvP game");
 	mainMenu[0].setCharacterSize(fontSize);
 	mainMenu[0].setPosition(MenuItemX, 300);
 
 	// Online game
 	mainMenu[1].setFont(font);
-	mainMenu[1].setFillColor(Color::Blue);
+	mainMenu[1].setFillColor(menuColor);
 	mainMenu[1].setString("Online game");
 	mainMenu[1].setCharacterSize(fontSize);
 	mainMenu[1].setPosition(MenuItemX, 400);
 
 	// About game
 	mainMenu[2].setFont(font);
-	mainMenu[2].setFillColor(Color::Blue);
+	mainMenu[2].setFillColor(menuColor);
 	mainMenu[2].setString("About game");
 	mainMenu[2].setCharacterSize(fontSize);
 	mainMenu[2].setPosition(MenuItemX, 500);
 
 	// Exit
 	mainMenu[3].setFont(font);
-	mainMenu[3].setFillColor(Color::Blue);
+	mainMenu[3].setFillColor(menuColor);
 	mainMenu[3].setString("Exit");
 	mainMenu[3].setCharacterSize(fontSize);
 	mainMenu[3].setPosition(MenuItemX, 600);
@@ -82,7 +85,7 @@ void GameMenu::menuMoveUp()
 {
 	if (gameMenuSelected - 1 >= 0)
 	{
-		mainMenu[gameMenuSelected].setFillColor(Color::Blue);
+		mainMenu[gameMenuSelected].setFillColor(menuColor);
 
 		gameMenuSelected--;
 
@@ -91,7 +94,7 @@ void GameMenu::menuMoveUp()
 			gameMenuSelected = 4;
 		}
 
-		mainMenu[gameMenuSelected].setFillColor(Color::White);
+		mainMenu[gameMenuSelected].setFillColor(choiceColor);
 	}
 }
 
@@ -99,7 +102,8 @@ void GameMenu::menuMoveDown()
 {
 	if (gameMenuSelected + 1 <= max_menu_items)
 	{
-		mainMenu[gameMenuSelected].setFillColor(Color::Blue);
+		mainMenu[gameMenuSelected].setFillColor(menuColor);
+
 		gameMenuSelected++;
 
 		if (gameMenuSelected == 4)
@@ -107,6 +111,6 @@ void GameMenu::menuMoveDown()
 			gameMenuSelected = 0;
 		}
 
-		mainMenu[gameMenuSelected].setFillColor(Color::White);
+		mainMenu[gameMenuSelected].setFillColor(choiceColor);
 	}
 }

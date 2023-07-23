@@ -12,7 +12,7 @@
 using namespace sf;
 using namespace std;
 
-RenderWindow window(VideoMode(1500, 800), "App", Style::Default);
+RenderWindow window(VideoMode(1500, 800), "App", Style::Titlebar);
 App pvpGame; 
 App game;
 
@@ -29,6 +29,11 @@ void App::show_menu(RenderWindow& window)
 
 		while (window.pollEvent(menuEvent))
 		{
+			if (menuEvent.type == menuEvent.Closed)
+			{
+				window.close();
+			}
+
 			if (menuEvent.type == Event::KeyReleased)
 			{
 				if (menuEvent.key.code == Keyboard::Up || menuEvent.key.code == Keyboard::W)
@@ -72,7 +77,7 @@ void App::show_menu(RenderWindow& window)
 			}
 		}
 
-		window.clear();
+		window.clear(Color::White);
 		menu.showMenuItems(window);
 		menu.showHeader(window);
 		window.display();
@@ -112,9 +117,7 @@ void App::pvp_game(RenderWindow& window) const
 	// Set velocity
 	leftPlayer.setVelocity(Velocity);
 
-
 	/* Player on the right */ 
-
 	float rightPlayerPosX = (window.getSize().x - playerZize.x);
 	float rightPlayerPosY = ((window.getSize().y / 2.0) - (playerZize.y / 2));
 
@@ -209,11 +212,8 @@ void App::pvp_game(RenderWindow& window) const
 			}
 		}
 
-
-
 		ball1.ballMoving(ball1);
 		ball1.Collision(ball1, leftPlayer, rightPlayer, window);
-		ball1.counter(ball1, window);
 
 		Image icon;
 		icon.loadFromFile("D:/c++++/SFML_Project/appicon.png");
