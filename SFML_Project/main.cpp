@@ -4,7 +4,7 @@
 int main()
 {
     App application;
-    application.startGame();
+    application.show_menu();
 
     return 0;
 }

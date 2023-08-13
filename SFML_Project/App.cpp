@@ -7,7 +7,12 @@
 #include "Players.h"
 #include "GameMenu.h"
 
-// Look at sfml book and try to rewrite ball trajectory 
+//***************************************************************************/
+//																		    //
+// finish the UIPanel and Button classes, remake the project based on them  //
+//																		    //
+/****************************************************************************/
+
 
 using namespace sf;
 using namespace std;
@@ -16,7 +21,7 @@ RenderWindow window(VideoMode(1500, 800), "App", Style::Titlebar);
 App pvpGame; 
 App game;
 
-void App::show_menu(RenderWindow& window)
+void App::show_menu(/*RenderWindow& window*/)
 {
 	int menuHeight = window.getSize().x;
 	int menuWidth =  window.getSize().y;
@@ -215,7 +220,7 @@ void App::pvp_game(RenderWindow& window) const
 		ball1.Collision(ball1, leftPlayer, rightPlayer, window);
 
 		Image icon;
-		icon.loadFromFile("SFML_Project/appicon.png");
+		icon.loadFromFile("D:/c++++/SFML_Project/appicon.png");
 		window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 		Color windowColor(0, 0, 205);
@@ -319,7 +324,7 @@ void App::endGame()
 				if (exitDecision == 1)
 				{
 					endGameWindow.close();
-					game.show_menu(window);
+					game.show_menu();
 				}
 
 				if (exitDecision == 2)
@@ -342,9 +347,4 @@ void App::endGame()
 	delete[]toBeContinued;
 
 	cout << "end game\n";
-}
-
-void App::startGame()
-{
-	game.show_menu(window);
 }
