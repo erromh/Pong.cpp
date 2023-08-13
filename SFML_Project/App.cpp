@@ -215,7 +215,7 @@ void App::pvp_game(RenderWindow& window) const
 		ball1.Collision(ball1, leftPlayer, rightPlayer, window);
 
 		Image icon;
-		icon.loadFromFile("D:/c++++/SFML_Project/appicon.png");
+		icon.loadFromFile("SFML_Project/appicon.png");
 		window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 		Color windowColor(0, 0, 205);
@@ -238,7 +238,7 @@ void App::endGame()
 	RenderWindow endGameWindow(VideoMode(600, 400), "", Style::Default);
 	
 	Font endGameFont;
-	endGameFont.loadFromFile("D:/c++++/SFML_Project/MilkyMania.ttf");
+	endGameFont.loadFromFile("SFML_Project/MilkyMania.ttf");
 	int CharacterSize = 40;
 	
 	int exitDecision = -1;
