@@ -8,14 +8,12 @@ using namespace sf;
 class GameMenu
 {
 private:
-
 	int gameMenuSelected;
 	Font font;
 	Text mainMenu[max_menu_items];
 	Text header;
 
 public:
-
 	GameMenu(float width, float height, RenderWindow const& menuWindow);
 
 	void showMenuItems(RenderWindow& menuWindow);

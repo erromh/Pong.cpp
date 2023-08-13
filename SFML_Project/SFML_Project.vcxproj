@@ -149,14 +149,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="EndGame.cpp" />
     <ClCompile Include="GameMenu.cpp" />
+    <ClCompile Include="MoveItems.cpp" />
     <ClCompile Include="Players.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="App.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="EndGame.h" />
     <ClInclude Include="GameMenu.h" />
+    <ClInclude Include="MoveItems.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="App.h" />
   </ItemGroup>

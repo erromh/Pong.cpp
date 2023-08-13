@@ -123,7 +123,6 @@ void App::pvp_game(RenderWindow& window) const
 
 	Vector2f rightPosition(rightPlayerPosX, rightPlayerPosY);
 	Players rightPlayer(playerZize, rightPosition, playersColor);
-
 	rightPlayer.setVelocity(Velocity);
 
 
@@ -234,11 +233,6 @@ void App::pvp_game(RenderWindow& window) const
 	}	
 }
 
-void App::startGame()
-{
-	game.show_menu(window);
-}
-
 void App::endGame()
 {
 	RenderWindow endGameWindow(VideoMode(600, 400), "", Style::Default);
@@ -337,12 +331,20 @@ void App::endGame()
 		}
 
 		endGameWindow.clear();
+		
 		for (int i = 0; i < 3; i++)
-		{ endGameWindow.draw(toBeContinued[i]); }
+		{ 
+			endGameWindow.draw(toBeContinued[i]); 
+		}
 		endGameWindow.display();
 	}
 
 	delete[]toBeContinued;
 
 	cout << "end game\n";
+}
+
+void App::startGame()
+{
+	game.show_menu(window);
 }
